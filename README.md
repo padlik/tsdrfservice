@@ -1,2 +1,2 @@
 # tsdrfservice
-Somple web service for my reporting
+Simple web service for my reporting
