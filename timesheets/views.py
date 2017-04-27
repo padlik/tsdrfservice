@@ -1,13 +1,12 @@
 # Create your views here.
-from django.http import HttpResponse
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from rest_framework import generics
+from rest_framework import filters
 from .models import Users
 from .serializers import UserSerializer
 
 
-class UserList(APIView):
-    def get(self, request, format=None):
-        users = Users.objects.all()
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data)
+class UserListView(generics.ListAPIView):
+    serializer_class = UserSerializer
+    queryset = Users.objects.all()
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('sugar_uname', 'intetics_uname')
