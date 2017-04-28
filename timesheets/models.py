@@ -21,7 +21,8 @@ class Users(models.Model):
 
 class Timesheets(models.Model):
     key = models.AutoField(primary_key=True)
-    userid = models.ForeignKey(Users)
+    userid = models.ForeignKey(Users, related_name='timesheets')
+    userid.db_column='userid' # need to set this explicitly to avoid Django magic
     time_spent = models.FloatField()
     description = models.TextField(blank=True, null=True)
     activity_date = models.DateField()

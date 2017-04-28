@@ -7,6 +7,9 @@ from .serializers import UserSerializer
 
 class UserListView(generics.ListAPIView):
     serializer_class = UserSerializer
-    queryset = Users.objects.all()
-    filter_backends = (filters.SearchFilter,)
+    queryset = Users.objects.filter(dissmissed='N')
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter, filters.DjangoFilterBackend,)
+    filter_fields = ('team', 'location')
     search_fields = ('sugar_uname', 'intetics_uname')
+    ordering_fields = ('sugar_uname', 'intetics_uname', 'location', 'team')
+    ordering = ('sugar_uname')
