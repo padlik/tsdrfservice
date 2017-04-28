@@ -12,8 +12,7 @@ class TimesheetsSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    timesheets = TimesheetsSerializer(many=True, read_only=True)
 
     class Meta:
         model = Users
-        fields = ('id', 'sugar_id', 'sugar_uname', 'intetics_uname', 'location', 'dissmissed', 'team', 'timesheets')
+        fields = ('id', 'sugar_id', 'sugar_uname', 'intetics_uname', 'location', 'dissmissed', 'team', )
