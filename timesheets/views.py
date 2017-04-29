@@ -1,10 +1,12 @@
 # Create your views here.
-from rest_framework import generics
+import django_filters
 from rest_framework import filters
-from .models import Users
+from rest_framework import generics
+
 from .models import Timesheets
-from .serializers import UserSerializer
+from .models import Users
 from .serializers import TimesheetsSerializer
+from .serializers import UserSerializer
 
 
 class UserListView(generics.ListAPIView):
@@ -17,9 +19,19 @@ class UserListView(generics.ListAPIView):
     ordering = ('sugar_uname')
 
 
+class TimesheetsFilter(django_filters.FilterSet):
+    date_from = django_filters.DateFilter(name="activity_date", lookup_expr='gte')
+    date_to = django_filters.DateFilter(name="activity_date", lookup_expr='lte')
+
+    class Meta:
+        model = Timesheets
+        fields = ['date_from', 'date_to']
+
+
 class TimesheetsView(generics.ListAPIView):
     serializer_class = TimesheetsSerializer
     queryset = Timesheets.objects.all()
+    filter_class = TimesheetsFilter
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, filters.DjangoFilterBackend,)
     filter_fields = ('source',)
     search_fields = ('name', 'description')

@@ -1,6 +1,7 @@
-from .models import Users
-from .models import Timesheets
 from rest_framework import serializers
+
+from .models import Timesheets
+from .models import Users
 
 
 class TimesheetsSerializer(serializers.ModelSerializer):
@@ -8,11 +9,13 @@ class TimesheetsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Timesheets
-        fields = ('activity_date',  'time_spent', 'name', 'source', 'description', 'created_by')
+        fields = ('activity_date', 'time_spent', 'name', 'source', 'description', 'created_by')
 
 
 class UserSerializer(serializers.ModelSerializer):
+    timesheets_count = serializers.IntegerField(source='get_timesheets_count', read_only=True)
 
     class Meta:
         model = Users
-        fields = ('id', 'sugar_id', 'sugar_uname', 'intetics_uname', 'location', 'dissmissed', 'team', )
+        fields = (
+            'id', 'sugar_id', 'sugar_uname', 'intetics_uname', 'location', 'dissmissed', 'team', 'timesheets_count',)

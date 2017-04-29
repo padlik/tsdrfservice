@@ -14,6 +14,10 @@ class Users(models.Model):
     dissmissed = models.CharField(max_length=1, blank=True, null=True)
     team = models.CharField(max_length=45, blank=True, null=True)
 
+    def get_timesheets_count(self):
+        return Timesheets.objects.filter(userid=self).count()
+
+
     class Meta:
         managed = False
         db_table = 'users'
