@@ -14,10 +14,6 @@ class Users(models.Model):
     dissmissed = models.CharField(max_length=1, blank=True, null=True)
     team = models.CharField(max_length=45, blank=True, null=True)
 
-    def get_timesheets_count(self):
-        return Timesheets.objects.filter(userid=self).count()
-
-
     class Meta:
         managed = False
         db_table = 'users'
@@ -26,7 +22,7 @@ class Users(models.Model):
 class Timesheets(models.Model):
     key = models.AutoField(primary_key=True)
     userid = models.ForeignKey(Users, related_name='timesheets')
-    userid.db_column='userid' # need to set this explicitly to avoid Django magic
+    userid.db_column = 'userid'  # need to set this explicitly to avoid Django magic
     time_spent = models.FloatField()
     description = models.TextField(blank=True, null=True)
     activity_date = models.DateField()

@@ -11,12 +11,33 @@ from .serializers import UserSerializer
 
 class UserListView(generics.ListAPIView):
     serializer_class = UserSerializer
-    queryset = Users.objects.filter(dissmissed='N')
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, filters.DjangoFilterBackend,)
     filter_fields = ('team', 'location')
     search_fields = ('sugar_uname', 'intetics_uname')
     ordering_fields = ('sugar_uname', 'intetics_uname', 'location', 'team')
     ordering = ('sugar_uname')
+
+    def get_queryset(self):
+        date_from = self.request.query_params.get('date_from', None)
+        date_to = self.request.query_params.get('date_to', None)
+        q = """
+           SELECT  sum_t FROM 
+          (SELECT userid, SUM(time_spent) sum_t FROM
+           timesheets JOIN users ON users.id = timesheets.userid
+           
+        """
+        if date_from is not None:
+            q = q + " WHERE timesheets.activity_date >= '{}' ".format(date_from)
+        if date_to is not None:
+            if q.find("WHERE") != -1:
+                q = q + " AND "
+            else:
+                q = q + "WHERE "
+            q = q + " timesheets.activity_date <= '{}' ".format(date_to)
+        q = q + ' GROUP BY timesheets.userid ) AS ts_sum '
+        q = q + ' WHERE users.id = ts_sum.userid'
+        users = Users.objects.filter(dissmissed='N').extra(select={"timesheets_sum": q})
+        return users
 
 
 class TimesheetsFilter(django_filters.FilterSet):
@@ -30,7 +51,6 @@ class TimesheetsFilter(django_filters.FilterSet):
 
 class TimesheetsView(generics.ListAPIView):
     serializer_class = TimesheetsSerializer
-    queryset = Timesheets.objects.all()
     filter_class = TimesheetsFilter
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, filters.DjangoFilterBackend,)
     filter_fields = ('source',)

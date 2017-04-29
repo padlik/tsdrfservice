@@ -13,9 +13,8 @@ class TimesheetsSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    timesheets_count = serializers.IntegerField(source='get_timesheets_count', read_only=True)
+    timesheets_sum = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Users
-        fields = (
-            'id', 'sugar_id', 'sugar_uname', 'intetics_uname', 'location', 'dissmissed', 'team', 'timesheets_count',)
+        fields = ('id', 'sugar_id', 'sugar_uname', 'intetics_uname', 'location', 'dissmissed', 'team', 'timesheets_sum')
