@@ -59,5 +59,7 @@ class TimesheetsView(generics.ListAPIView):
     ordering = ('activity_date')
 
     def get_queryset(self):
-        user = self.kwargs['created_by']
-        return Timesheets.objects.filter(userid__sugar_uname=user)
+        user = self.kwargs.get('created_by', None)
+        if user is not None:
+            return Timesheets.objects.filter(userid__sugar_uname=user)
+        return Timesheets.objects.all()
