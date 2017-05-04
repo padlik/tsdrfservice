@@ -88,6 +88,18 @@ ENV/
 # Rope project settings
 .ropeproject
 
+#node enviroment
+node_modules/
+npm-debug.log*
+build/Release
+jspm_packages/
+.npm
+.node_repl_history
+._*
+public
+
+
+
 #Idea
 .idea
 
