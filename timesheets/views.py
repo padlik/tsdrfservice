@@ -7,6 +7,7 @@ from .models import Timesheets
 from .models import Users
 from .serializers import TimesheetsSerializer
 from .serializers import UserSerializer
+from django.views.generic import TemplateView
 
 
 class UserListView(generics.ListAPIView):
@@ -63,3 +64,7 @@ class TimesheetsView(generics.ListAPIView):
         if user is not None:
             return Timesheets.objects.filter(userid__sugar_uname=user)
         return Timesheets.objects.all()
+
+
+class IndexTemplateView(TemplateView):
+    template_name = 'index.html'

@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from timesheets.views import IndexTemplateView
 
 urlpatterns = [
+    url(r'^$', IndexTemplateView.as_view(), name="index"),
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('timesheets.urls')),
 ]

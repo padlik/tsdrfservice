@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello React</title>
+    {% if debug %}
+        <link rel="stylesheet" href="http://localhost:8050/public/assets/styles.css">
+    {% else %}
+        <link rel="stylesheet" href="/public/assets/styles.css">
+    {% endif %}
+
+</head>
+<body>
+{% if debug %}
+    <script type="application/javascript" src="http://localhost:8050/public/assets/bundle.js"></script>
+{% else %}
+    <script type="application/javascript" src="/public/assets/bundle.js"></script>
+{% endif %}
+</body>
+</html>
