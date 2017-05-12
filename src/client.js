@@ -1,8 +1,18 @@
 /**
  * Created by paul on 5/4/17.
  */
-import React      from 'react';
-import ReactDOM   from 'react-dom';
-import App        from 'components/App';
+import React from "react";
+import ReactDOM from "react-dom";
+import {Provider} from "react-redux";
+import configureStore from "./redux/confugureStore";
+import App from "components/App/App";
 
-ReactDOM.render(<App />, document.getElementById('react-view'));
+const store = configureStore();
+
+const component = (
+    <Provider store={store}>
+        <App/>
+    </Provider>
+);
+
+ReactDOM.render(component, document.getElementById('react-view'));
