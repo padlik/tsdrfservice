@@ -1,5 +1,6 @@
 # Create your views here.
 import django_filters
+from django.views.generic import TemplateView
 from rest_framework import filters
 from rest_framework import generics
 
@@ -7,7 +8,6 @@ from .models import Timesheets
 from .models import Users
 from .serializers import TimesheetsSerializer
 from .serializers import UserSerializer
-from django.views.generic import TemplateView
 
 
 class UserListView(generics.ListAPIView):
@@ -16,7 +16,7 @@ class UserListView(generics.ListAPIView):
     filter_fields = ('team', 'location')
     search_fields = ('sugar_uname', 'intetics_uname')
     ordering_fields = ('sugar_uname', 'intetics_uname', 'location', 'team')
-    ordering = ('sugar_uname')
+    ordering = 'sugar_uname'
 
     def get_queryset(self):
         date_from = self.request.query_params.get('date_from', None)
@@ -57,7 +57,7 @@ class TimesheetsView(generics.ListAPIView):
     filter_fields = ('source',)
     search_fields = ('name', 'description')
     ordering_fields = ('activity_date', 'name', 'source',)
-    ordering = ('activity_date')
+    ordering = 'activity_date'
 
     def get_queryset(self):
         user = self.kwargs.get('created_by', None)

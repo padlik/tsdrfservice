@@ -21,8 +21,6 @@ class FilterPanel extends Component {
         return <FilterView text={this.props.search.search} onChange={this.handleSearch}/>
     }
 }
-;
-
 FilterPanel.Proptypes = {
     search: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
@@ -30,8 +28,7 @@ FilterPanel.Proptypes = {
 
 const mapStateToProps = state => {
     return {
-        search: state.search/*,
-         summary: state.summary*/
+        search: state.search
     }
 };
 

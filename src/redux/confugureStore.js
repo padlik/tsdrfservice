@@ -11,5 +11,5 @@ const loggerMiddleware = createLogger({level: 'info'});
 
 
 export default function (initialState = {}) {
-    return createStore(rootReducer, initialState, composeWithDevTools(applyMiddleware(thunkMiddleware, loggerMiddleware)));
+    return createStore(rootReducer, initialState, composeWithDevTools(applyMiddleware(thunkMiddleware)));
 }

@@ -12,7 +12,7 @@ import "./bootstrap.css";
 
 
 class App extends Component {
-    render() {
+    static render() {
         return (
             <BrowserRouter>
                 <div>
