@@ -3,12 +3,12 @@
  */
 export const SEARCH_CHANGED = 'SEARCH_CHANGED';
 
-export function searchChanged(search_params) {
-    let {search, date_from, date_to} = search_params;
+export function searchChanged(params) {
+    let {search, date_from, date_to} = params;
     return {
         type: SEARCH_CHANGED,
         search: search,
-        date_from: '',
-        date_to: ''
+        date_from: date_from,
+        date_to: date_to
     }
 }

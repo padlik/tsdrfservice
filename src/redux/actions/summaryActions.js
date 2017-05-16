@@ -35,12 +35,19 @@ export function summaryRequestError(errors) {
 
 }
 
-export function summaryRequest(text) {
+export function summaryRequest() {
     return (dispatch, getState) => {
         let state = getState();
+        let {search, date_from, date_to} = state.search;
         let url = `//localhost:8000/api/users/?format=json`;
-        if (text) {
-            url += `&search=${text}`
+        if (search) {
+            url += `&search=${search}`
+        }
+        if (date_from) {
+            url += `&date_from=${date_from}`
+        }
+        if (date_to) {
+            url += `&date_to=${date_to}`
         }
         dispatch(summaryRequestStarted());
         return fetch(url)

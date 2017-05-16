@@ -6,19 +6,53 @@ import {searchChanged} from "redux/actions/searchActions";
 import {bindActionCreators} from "redux";
 
 class FilterPanel extends Component {
+    constructor(props) {
+        super(props);
+        this.search_params = {
+            search: this.props.search.search,
+            date_from: this.props.search.date_from,
+            date_to: this.props.search.date_to
+        };
+        console.dir(this.search_params);
+    }
 
-
-    handleSearch = search => {
+    updateSearch = () => {
         if (this.promise) {
             clearInterval(this.promise)
         }
-        this.props.actions.searchChanged({search: search});
-        this.promise = setTimeout(() => this.props.actions.summaryRequest(search), 500)
+        this.props.actions.searchChanged(this.search_params);
+        this.promise = setTimeout(() => this.props.actions.summaryRequest(), 500)
     };
 
+    handleText = text => {
+        this.search_params.search = text;
+        this.updateSearch();
+    };
+
+    handleDateFrom = (rawDate, formattedDate) => {
+        this.search_params.date_from = formattedDate;
+        this.updateSearch();
+    };
+
+    handleDateTo = (rawDate, formattedDate) => {
+        this.search_params.date_to = formattedDate;
+        this.updateSearch();
+    };
+
+    handleClearSearch = () => {
+        this.search_params = {};
+        this.updateSearch();
+    };
 
     render() {
-        return <FilterView text={this.props.search.search} onChange={this.handleSearch}/>
+        return <FilterView text={this.search_params.search || ''}
+                           date_from={this.search_params.date_from}
+                           date_to={this.search_params.date_to}
+                           onSearchChange={this.handleText}
+                           onDateFromChange={this.handleDateFrom}
+                           onDateToChange={this.handleDateTo}
+                           onClearSearch={this.handleClearSearch}
+        />
     }
 }
 FilterPanel.Proptypes = {

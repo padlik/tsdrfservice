@@ -12,7 +12,7 @@ import "./bootstrap.css";
 
 
 class App extends Component {
-    static render() {
+    render() {
         return (
             <BrowserRouter>
                 <div>
@@ -25,6 +25,8 @@ class App extends Component {
                     </Navbar>
                     <Grid>
                         <Route exact path="/" component={FilterPanel}/>
+                        {'  '}
+                        <hr />
                         <Route exact path="/" component={TablePanel}/>
                     </Grid>
                 </div>
@@ -32,6 +34,5 @@ class App extends Component {
         );
     }
 }
-
 
 export default App;
