@@ -8,10 +8,10 @@ class TablePanel extends Component {
 
         return <div>
             <BootstrapTable data={this.props.summary.summary} striped hover condensed>
-                <TableHeaderColumn isKey dataField='id' width='10%'>ID</TableHeaderColumn>
-                <TableHeaderColumn dataField='sugar_uname' width='40%'>Sugar Name</TableHeaderColumn>
-                <TableHeaderColumn dataField='team' width='20%'>Team</TableHeaderColumn>
-                <TableHeaderColumn dataField='timesheets_sum'>Hrs.</TableHeaderColumn>
+                <TableHeaderColumn isKey dataField='id' width='10%'>#</TableHeaderColumn>
+                <TableHeaderColumn dataField='sugar_uname' width='40%' dataSort={ true }>Sugar Name</TableHeaderColumn>
+                <TableHeaderColumn dataField='team' width='20%' dataSort={ true }>Team</TableHeaderColumn>
+                <TableHeaderColumn dataField='timesheets_sum' dataSort={ true }>Hrs.</TableHeaderColumn>
             </BootstrapTable>
         </div>
     }

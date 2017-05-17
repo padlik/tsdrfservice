@@ -27,7 +27,7 @@ class App extends Component {
                         <Route exact path="/" component={FilterPanel}/>
                         {'  '}
                         <hr />
-                        <Route exact path="/" component={TablePanel}/>
+                        <Route path="/" component={TablePanel}/>
                     </Grid>
                 </div>
             </BrowserRouter>

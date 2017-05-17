@@ -13,7 +13,7 @@ class FilterPanel extends Component {
             date_from: this.props.search.date_from,
             date_to: this.props.search.date_to
         };
-        console.dir(this.search_params);
+
     }
 
     updateSearch = () => {
