@@ -5,6 +5,7 @@ import {apiRequest, summarySearchChanged} from "redux/actions/searchActions";
 import {bindActionCreators} from "redux";
 import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
 import {SUMMARY_VIEW, viewChanged} from "redux/actions/uiActions";
+import {Link} from "react-router-dom";
 
 
 class SummaryPanel extends Component {
@@ -50,6 +51,10 @@ class SummaryPanel extends Component {
         this.updateSearch();
     };
 
+    linkFormatter(cell) {
+        return <Link to={`/${cell}`}>{cell}</Link>
+    }
+
     render() {
         return <div>
             <FilterView text={this.search_params.search || ''}
@@ -80,8 +85,8 @@ SummaryPanel.Proptypes = {
 
 const mapStateToProps = state => {
     return {
-        search: state.search.summary_search,
-        summary: state.summary
+        search: state.search.summary_search, //search parameters
+        summary: state.summary //table data
     }
 };
 

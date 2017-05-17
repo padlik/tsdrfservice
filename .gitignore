@@ -104,3 +104,4 @@ public
 .idea
 
 !/src/redux/reducers/index.js
+!/src/components/SummaryPanel/SummaryPanel.jsx
