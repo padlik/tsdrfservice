@@ -6,6 +6,7 @@ import summaryReducer from "./summaryReducer";
 import searchReducer from "./searchReducer";
 import uiReducer from "./uiReducer";
 
+
 export default combineReducers({
     summary: summaryReducer,
     search: searchReducer,

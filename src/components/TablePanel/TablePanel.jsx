@@ -1,9 +1,15 @@
 import React, {Component, PropTypes} from "react";
 import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
 import "./react-bootstrap-table.min.css";
+import {SUMMARY_VIEW, viewChanged} from "redux/actions/uiActions";
 
 class TablePanel extends Component {
+    componentDidMount() {
+        this.props.actions.viewChanged(SUMMARY_VIEW);
+    }
+
     render() {
 
         return <div>
@@ -23,9 +29,14 @@ const mapStateToProps = state => {
     }
 };
 
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators({viewChanged}, dispatch)
+});
+
+
 TablePanel.PropTypes = {
     summary: PropTypes.node.isRequired
 };
 
 
-export default connect(mapStateToProps)(TablePanel);
+export default connect(mapStateToProps, mapDispatchToProps)(TablePanel);

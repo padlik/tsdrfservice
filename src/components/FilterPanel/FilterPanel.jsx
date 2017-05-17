@@ -1,8 +1,7 @@
 import React, {Component, PropTypes} from "react";
 import {connect} from "react-redux";
 import FilterView from "./FileterView";
-import {summaryRequest} from "redux/actions/summaryActions";
-import {searchChanged} from "redux/actions/searchActions";
+import {apiRequest, searchChanged} from "redux/actions/searchActions";
 import {bindActionCreators} from "redux";
 
 class FilterPanel extends Component {
@@ -21,7 +20,7 @@ class FilterPanel extends Component {
             clearInterval(this.promise)
         }
         this.props.actions.searchChanged(this.search_params);
-        this.promise = setTimeout(() => this.props.actions.summaryRequest(), 500)
+        this.promise = setTimeout(() => this.props.actions.apiRequest(), 500)
     };
 
     handleText = text => {
@@ -67,7 +66,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators({summaryRequest, searchChanged}, dispatch)
+    actions: bindActionCreators({apiRequest, searchChanged}, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterPanel)
