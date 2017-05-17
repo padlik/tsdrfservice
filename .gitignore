@@ -103,3 +103,4 @@ public
 #Idea
 .idea
 
+!/src/redux/reducers/index.js
