@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from "react";
 import {connect} from "react-redux";
-import FilterView from "../FilterPanel/FileterView";
+import FilterView from "../FilterPanel/FilterView";
 import {apiRequest, summarySearchChanged} from "redux/actions/searchActions";
 import {bindActionCreators} from "redux";
 import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
