@@ -1,21 +1,26 @@
 /**
  * Created by paul on 5/11/17.
  */
-import {SEARCH_CHANGED} from "redux/actions/searchActions";
+import {SUMMARY_SEARCH_CHANGED} from "redux/actions/searchActions";
 
 const searchInitialState = {
-    search: '',
-    date_from: '',
-    date_to: ''
+    summary_search: {
+        date_from: '',
+        date_to: '',
+        search: ''
+    },
+    list_search: {
+        date_from: '',
+        date_to: '',
+        search: ''
+    }
 };
 
 export default function (state = searchInitialState, action) {
     switch (action.type) {
-        case SEARCH_CHANGED:
+        case SUMMARY_SEARCH_CHANGED:
             return Object.assign({}, state, {
-                search: action.search,
-                date_from: action.date_from,
-                date_to: action.date_to
+                summary_search: action.summary_search
             });
         default:
             return state;
