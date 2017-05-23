@@ -105,3 +105,4 @@ public
 
 !/src/redux/reducers/index.js
 !/src/components/SummaryPanel/SummaryPanel.jsx
+!/src/components/App/bootstrap.css

@@ -9,7 +9,7 @@ class TimesheetsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Timesheets
-        fields = ('activity_date', 'time_spent', 'name', 'source', 'description', 'created_by')
+        fields = ('key', 'activity_date', 'time_spent', 'name', 'source', 'description', 'created_by')
 
 
 class UserSerializer(serializers.ModelSerializer):

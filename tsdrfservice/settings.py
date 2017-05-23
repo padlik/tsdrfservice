@@ -143,3 +143,9 @@ STATIC_URL = '/static/'
 
 # CORS config
 CORS_ORIGIN_ALLOW_ALL = True
+
+#React config
+REACT_ROUTES = [
+    '/',
+    ':name'
+]

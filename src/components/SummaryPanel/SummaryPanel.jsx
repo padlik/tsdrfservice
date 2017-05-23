@@ -53,7 +53,7 @@ class SummaryPanel extends Component {
     };
 
     linkFormatter(cell) {
-        return <Link to={`/${cell}`}>{cell}</Link>
+        return <Link to={`/ts/${cell}`}>{cell}</Link>
     }
 
     render() {

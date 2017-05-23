@@ -18,7 +18,8 @@ from django.contrib import admin
 from timesheets.views import IndexTemplateView
 
 urlpatterns = [
-    url(r'^$', IndexTemplateView.as_view(), name="index"),
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('timesheets.urls')),
+    url(r'^$', IndexTemplateView.as_view(), name="index"),
+    url(r'^ts/', IndexTemplateView.as_view(), name="index"),
 ]

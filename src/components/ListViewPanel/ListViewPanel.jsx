@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {apiRequest, listSearchChanged} from "redux/actions/searchActions";
 import {DETAIL_LIST_VIEW, viewChanged} from "redux/actions/uiActions";
+import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
 
 
 class ListViewPanel extends Component {
@@ -20,14 +21,24 @@ class ListViewPanel extends Component {
 
 
     render() {
-        return <div>Sub for Timesheets List View:<strong>{this.props.match.params.userid}</strong></div>
+        return <div>
+            <BootstrapTable data={this.props.details} striped hover condensed>
+                <TableHeaderColumn isKey dataField='key' hidden>#</TableHeaderColumn>
+                <TableHeaderColumn dataField='activity_date' width='8%' dataSort={ true }>Date</TableHeaderColumn>
+                <TableHeaderColumn dataField='name' dataSort={ true }>Name</TableHeaderColumn>
+                <TableHeaderColumn dataField='source' width='7%' dataSort={ true }>Source</TableHeaderColumn>
+                <TableHeaderColumn dataField='time_spent' width='4%' >Time</TableHeaderColumn>
+                <TableHeaderColumn dataField='description'>Description</TableHeaderColumn>
+            </BootstrapTable>
+        </div>
     }
 }
 
 const mapStateToProps = state => {
     return {
         search: state.search,
-        ui: state.ui
+        ui: state.ui,
+        details: state.detail.details
     }
 };
 

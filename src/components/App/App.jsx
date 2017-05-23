@@ -27,7 +27,7 @@ class App extends Component {
                     <Grid>
                         <Switch>
                             <Route exact path="/" component={SummaryPanel}/>
-                            <Route path="/:userid" component={ListViewPanel}/>
+                            <Route path="/ts/:userid" component={ListViewPanel}/>
                         </Switch>
                     </Grid>
                 </div>
