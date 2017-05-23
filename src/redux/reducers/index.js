@@ -5,10 +5,12 @@ import {combineReducers} from "redux";
 import summaryReducer from "./summaryReducer";
 import searchReducer from "./searchReducer";
 import uiReducer from "./uiReducer";
+import detailReducer from "./detailReducer";
 
 
 export default combineReducers({
     summary: summaryReducer,
     search: searchReducer,
-    ui: uiReducer
+    ui: uiReducer,
+    detail: detailReducer
 });

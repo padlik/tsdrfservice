@@ -25,9 +25,10 @@ export function isLoading(loading) {
 
 }
 
-export function isError(errors) {
+export function isError(error) {
+    console.dir(error);
     return {
         type: ON_ERROR,
-        errors: errors
+        errors: error
     }
 }

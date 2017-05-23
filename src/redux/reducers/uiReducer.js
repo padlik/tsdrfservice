@@ -19,8 +19,7 @@ export default function (state = uiInitialState, action) {
             });
         case ON_LOADING:
             return Object.assign({}, state, {
-                loading: action.loading,
-                errors: []
+                loading: action.loading
             });
         case ON_ERROR:
             return Object.assign({}, state, {

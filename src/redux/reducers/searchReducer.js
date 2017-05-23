@@ -1,7 +1,7 @@
 /**
  * Created by paul on 5/11/17.
  */
-import {SUMMARY_SEARCH_CHANGED} from "redux/actions/searchActions";
+import {LIST_SEARCH_CHANGED, SUMMARY_SEARCH_CHANGED} from "redux/actions/searchActions";
 
 const searchInitialState = {
     summary_search: {
@@ -12,7 +12,8 @@ const searchInitialState = {
     list_search: {
         date_from: '',
         date_to: '',
-        search: ''
+        search: '',
+        userid: ''
     }
 };
 
@@ -21,6 +22,10 @@ export default function (state = searchInitialState, action) {
         case SUMMARY_SEARCH_CHANGED:
             return Object.assign({}, state, {
                 summary_search: action.summary_search
+            });
+        case LIST_SEARCH_CHANGED:
+            return Object.assign({}, state, {
+                list_search: action.list_search
             });
         default:
             return state;

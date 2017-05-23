@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from "react";
 import {connect} from "react-redux";
-import FilterView from "../FilterPanel/FilterView";
-import {apiRequest, summarySearchChanged} from "redux/actions/searchActions";
+import FilterView from "../FilterView/FilterView";
+import {apiRequest, summarySearchChanged, SummarySearchClear} from "redux/actions/searchActions";
 import {bindActionCreators} from "redux";
 import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
 import {SUMMARY_VIEW, viewChanged} from "redux/actions/uiActions";
@@ -11,11 +11,12 @@ import {Link} from "react-router-dom";
 class SummaryPanel extends Component {
     constructor(props) {
         super(props);
-        this.search_params = {
+        this.search = {
             search: this.props.search.search,
             date_from: this.props.search.date_from,
             date_to: this.props.search.date_to
         };
+        this.searchChanged = this.props.actions.summarySearchChanged;
 
     }
 
@@ -27,27 +28,27 @@ class SummaryPanel extends Component {
         if (this.promise) {
             clearInterval(this.promise)
         }
-        this.props.actions.summarySearchChanged(this.search_params);
+        this.searchChanged(this.search);
         this.promise = setTimeout(() => this.props.actions.apiRequest(), 500)
     };
 
     handleText = text => {
-        this.search_params.search = text;
+        this.search.search = text;
         this.updateSearch();
     };
 
     handleDateFrom = (rawDate, formattedDate) => {
-        this.search_params.date_from = formattedDate;
+        this.search.date_from = formattedDate;
         this.updateSearch();
     };
 
     handleDateTo = (rawDate, formattedDate) => {
-        this.search_params.date_to = formattedDate;
+        this.search.date_to = formattedDate;
         this.updateSearch();
     };
 
     handleClearSearch = () => {
-        this.search_params = {};
+        this.search = {search: '', date_from: '', date_to: ''};
         this.updateSearch();
     };
 
@@ -57,9 +58,9 @@ class SummaryPanel extends Component {
 
     render() {
         return <div>
-            <FilterView text={this.search_params.search || ''}
-                        date_from={this.search_params.date_from}
-                        date_to={this.search_params.date_to}
+            <FilterView text={this.search.search || ''}
+                        date_from={this.search.date_from}
+                        date_to={this.search.date_to}
                         onSearchChange={this.handleText}
                         onDateFromChange={this.handleDateFrom}
                         onDateToChange={this.handleDateTo}
@@ -91,7 +92,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators({apiRequest, summarySearchChanged, viewChanged}, dispatch)
+    actions: bindActionCreators({apiRequest, summarySearchChanged, viewChanged, SummarySearchClear}, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SummaryPanel)
