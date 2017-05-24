@@ -1,12 +1,13 @@
 /**
  * Created by paul on 5/17/17.
  */
-import {ACTIVE_VIEW_CHANGED, DETAIL_LIST_VIEW, ON_ERROR, ON_LOADING, SUMMARY_VIEW} from "redux/actions/uiActions";
+import {ACTIVE_VIEW_CHANGED, DETAIL_LIST_VIEW, ON_ERROR, ON_LOADING, ON_MESSAGE, SUMMARY_VIEW} from "redux/actions/uiActions";
 
 const uiInitialState = {
     view: SUMMARY_VIEW,
     loading: false,
-    errors: []
+    errors: {},
+    message: ''
 };
 
 export default function (state = uiInitialState, action) {
@@ -15,16 +16,22 @@ export default function (state = uiInitialState, action) {
             return Object.assign({}, state, {
                 view: action.view,
                 loading: false,
-                errors: []
+                errors: {}
             });
         case ON_LOADING:
             return Object.assign({}, state, {
-                loading: action.loading
+                loading: action.loading,
+                errors: {}
             });
         case ON_ERROR:
             return Object.assign({}, state, {
                 loading: false,
                 errors: action.errors
+            });
+        case ON_MESSAGE:
+            return Object.assign({}, state, {
+                message: action.message,
+                errors: {}
             });
         default:
             return state;

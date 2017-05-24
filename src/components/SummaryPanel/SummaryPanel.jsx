@@ -4,7 +4,7 @@ import FilterView from "../FilterView/FilterView";
 import {apiRequest, summarySearchChanged, SummarySearchClear} from "redux/actions/searchActions";
 import {bindActionCreators} from "redux";
 import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
-import {SUMMARY_VIEW, viewChanged} from "redux/actions/uiActions";
+import {SUMMARY_VIEW, viewChanged, onMessage} from "redux/actions/uiActions";
 import {Link} from "react-router-dom";
 
 
@@ -22,6 +22,7 @@ class SummaryPanel extends Component {
 
     componentDidMount() {
         this.props.actions.viewChanged(SUMMARY_VIEW);
+        this.props.actions.onMessage('');
     }
 
     updateSearch = () => {
@@ -92,7 +93,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators({apiRequest, summarySearchChanged, viewChanged, SummarySearchClear}, dispatch)
+    actions: bindActionCreators({apiRequest, summarySearchChanged, viewChanged, SummarySearchClear, onMessage}, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SummaryPanel)

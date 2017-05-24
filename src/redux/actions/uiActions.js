@@ -4,6 +4,7 @@
 export const ACTIVE_VIEW_CHANGED = 'ACTIVE_VIEW_CHANGED'; //called when active view has changed from summary to detail
 export const ON_LOADING = 'ON_LOADING';
 export const ON_ERROR = 'ON_ERROR';
+export const ON_MESSAGE = 'ON_MESSAGE';
 
 
 export const SUMMARY_VIEW = 'SUMMARY_VIEW';
@@ -30,5 +31,12 @@ export function isError(error) {
     return {
         type: ON_ERROR,
         errors: error
+    }
+}
+
+export function onMessage(msg) {
+    return {
+        type: ON_MESSAGE,
+        message: msg
     }
 }

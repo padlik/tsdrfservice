@@ -60,7 +60,6 @@ function makeReqParamsFromState(state) {
 export function apiRequest() {
     return (dispatch, getState) => {
         let state = getState();
-        console.dir(state);
         let {search, date_from, date_to, payload, prefix} = makeReqParamsFromState(state);
         let url = apiUrl + prefix;
         if (search) {

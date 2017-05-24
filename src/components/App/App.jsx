@@ -7,12 +7,22 @@ import Navbar from "react-bootstrap/lib/Navbar";
 import {BrowserRouter, Link, Route, Switch} from "react-router-dom";
 import SummaryPanel from "components/SummaryPanel";
 import ListViewPanel from "components/ListViewPanel";
+import LoadingOverlay from "components/LoadingOverlay";
+import {connect} from 'react-redux';
+import {apiRequest} from "redux/actions/searchActions";
+import {bindActionCreators} from "redux";
 
 import "./bootstrap.css";
 import "./react-bootstrap-table.min.css";
+import "./loader.css";
 
 
 class App extends Component {
+
+    componentDidMount() {
+        if (this.props.data.length === 0) this.props.actions.apiRequest();
+    }
+
     render() {
         return (
             <BrowserRouter>
@@ -20,10 +30,20 @@ class App extends Component {
                     <Navbar>
                         <Navbar.Header>
                             <Navbar.Brand>
-                                <Link to='/'>Timesheets</Link>
+                                <Link to='/'>Sugar Timesheets</Link>
                             </Navbar.Brand>
+                            <Navbar.Toggle />
                         </Navbar.Header>
+                        <Navbar.Collapse>
+                            <Navbar.Text>
+                                {this.props.ui.message}
+                            </Navbar.Text>
+                            <Navbar.Text pullRight>
+                                {(this.props.ui.loading) ? 'Loading...' : ((this.props.ui.errors.message) ? this.props.ui.errors.message : 'Success')}
+                            </Navbar.Text>
+                        </Navbar.Collapse>
                     </Navbar>
+                    <LoadingOverlay isLoading={this.props.ui.loading}/>
                     <Grid>
                         <Switch>
                             <Route exact path="/" component={SummaryPanel}/>
@@ -36,4 +56,15 @@ class App extends Component {
     }
 }
 
-export default App;
+
+const mapStateToProps = state => ({
+    ui: state.ui,
+    data: state.summary.summary
+});
+
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators({apiRequest}, dispatch)
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

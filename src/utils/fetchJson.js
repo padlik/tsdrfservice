@@ -5,12 +5,10 @@ import fetch from "isomorphic-fetch";
 
 
 function checkStatus(response) {
-    console.dir(response);
     if (response.ok) {
         return response;
     } else {
         const error = new Error(response.statusText);
-        error.response = response;
         throw error;
     }
 }
@@ -29,5 +27,6 @@ export function fetchJson(url, options) {
     }
     return fetch(url, options)
         .then(checkStatus)
-        .then(parseJSON);
+        .then(parseJSON)
+        .catch((error) => {throw error});
 }
