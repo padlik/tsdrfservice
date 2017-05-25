@@ -4,9 +4,11 @@
 
 export const DETAIL_REQ_FINISHED = 'DETAIL_REQ_FINISHED';
 
-export function detailRequestFinished(json) {
+
+export function detailRequestFinished(userid, json) {
     return {
         type: DETAIL_REQ_FINISHED,
-        detail: json
-    }
+        userid: userid,
+        sheets: json
+    };
 }

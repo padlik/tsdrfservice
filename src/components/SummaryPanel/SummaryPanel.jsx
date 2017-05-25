@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from "react";
 import {connect} from "react-redux";
 import FilterView from "../FilterView/FilterView";
-import {apiRequest, summarySearchChanged, SummarySearchClear} from "redux/actions/searchActions";
+import {apiRequestSummary, summarySearchChanged, SummarySearchClear} from "redux/actions/searchActions";
 import {bindActionCreators} from "redux";
 import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
 import {SUMMARY_VIEW, viewChanged, onMessage} from "redux/actions/uiActions";
@@ -22,7 +22,6 @@ class SummaryPanel extends Component {
 
     componentDidMount() {
         this.props.actions.viewChanged(SUMMARY_VIEW);
-        this.props.actions.onMessage('');
     }
 
     updateSearch = () => {
@@ -30,7 +29,7 @@ class SummaryPanel extends Component {
             clearInterval(this.promise)
         }
         this.searchChanged(this.search);
-        this.promise = setTimeout(() => this.props.actions.apiRequest(), 500)
+        this.promise = setTimeout(() => this.props.actions.apiRequestSummary(), 500)
     };
 
     handleText = text => {
@@ -93,7 +92,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators({apiRequest, summarySearchChanged, viewChanged, SummarySearchClear, onMessage}, dispatch)
+    actions: bindActionCreators({apiRequestSummary, summarySearchChanged, viewChanged, SummarySearchClear, onMessage}, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SummaryPanel)

@@ -46,22 +46,12 @@ export function listSearchChanged(params) {
 
 const apiUrl = `//localhost:8000/api/`;
 
-function makeReqParamsFromState(state) {
-    let search_state = (state.ui.view === SUMMARY_VIEW) ? state.search.summary_search : state.search.list_search;
-    let payload = (state.ui.view === SUMMARY_VIEW) ? summaryRequestFinished : detailRequestFinished;
-    let {search, date_from, date_to, userid} = search_state;
-    let prefix = (state.ui.view === SUMMARY_VIEW) ? `users/?format=json` : `users/${userid}/?format=json`;
-    return {search, date_from, date_to, payload, prefix};
-}
 
-//Central point to issue Api Requests from any view. Just set appropriate view in ui call apiRequest
-//it should automatically extract search conditions and URL parameters
-
-export function apiRequest() {
+export function apiRequestSummary() {
     return (dispatch, getState) => {
         let state = getState();
-        let {search, date_from, date_to, payload, prefix} = makeReqParamsFromState(state);
-        let url = apiUrl + prefix;
+        let {search, date_from, date_to} = state.search.summary_search;
+        let url = apiUrl + `users/?format=json`;
         if (search) {
             url += `&search=${search}`
         }
@@ -73,7 +63,29 @@ export function apiRequest() {
         }
         dispatch(isLoading(true));
         return fetchJson(url, {})
-            .then(json => dispatch(payload(json)))
+            .then(json => dispatch(summaryRequestFinished(json)))
+            .then(() => dispatch(isLoading(false)))
+            .catch((error) => dispatch(isError(error)));
+    }
+}
+
+export function apiRequestDetail() {
+    return (dispatch, getState) => {
+        let state = getState();
+        let {userid, search, date_from, date_to} = state.search.list_search;
+        let url = apiUrl + `users/${userid}/?format=json`;
+        if (search) {
+            url += `&search=${search}`
+        }
+        if (date_from) {
+            url += `&date_from=${date_from}`
+        }
+        if (date_to) {
+            url += `&date_to=${date_to}`
+        }
+        dispatch(isLoading(true));
+        return fetchJson(url, {})
+            .then(json => dispatch(detailRequestFinished(userid, json)))
             .then(() => dispatch(isLoading(false)))
             .catch((error) => dispatch(isError(error)));
     }
