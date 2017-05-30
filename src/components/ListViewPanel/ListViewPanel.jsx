@@ -13,16 +13,20 @@ class ListViewPanel extends Component {
 
     componentDidMount() {
         this.props.actions.viewChanged(DETAIL_LIST_VIEW);
-        let {date_from, date_to} = this.props.search.summary_search;
-        this.props.actions.listSearchChanged({search: '', date_from, date_to, userid: this.props.match.params.userid});
+        let {month} = this.props.search.summary_search;
+        this.props.actions.listSearchChanged({search: '', month, userid: this.props.match.params.userid});
         this.props.actions.apiRequestDetail();
+    }
+
+    overtimeFormatter(row) {
+        return row.description.indexOf(`vertime:`) !== -1 ? 'danger' : 'normal';
     }
 
 
     render() {
         return <div>
             <BootstrapTable data={(this.props.details.length === 0) ? [] : this.props.details[0].sheets} striped hover
-                            condensed>
+                            condensed trClassName={this.overtimeFormatter}>
                 <TableHeaderColumn isKey dataField='key' hidden>#</TableHeaderColumn>
                 <TableHeaderColumn dataField='activity_date' width='8%' dataSort={ true }>Date</TableHeaderColumn>
                 <TableHeaderColumn dataField='name' dataSort={ true }>Name</TableHeaderColumn>

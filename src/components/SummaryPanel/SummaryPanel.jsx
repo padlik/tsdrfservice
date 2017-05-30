@@ -13,8 +13,7 @@ class SummaryPanel extends Component {
         super(props);
         this.search = {
             search: this.props.search.search,
-            date_from: this.props.search.date_from,
-            date_to: this.props.search.date_to
+            month: this.props.search.month
         };
         this.searchChanged = this.props.actions.summarySearchChanged;
 
@@ -37,18 +36,13 @@ class SummaryPanel extends Component {
         this.updateSearch();
     };
 
-    handleDateFrom = (rawDate, formattedDate) => {
-        this.search.date_from = formattedDate;
-        this.updateSearch();
-    };
-
-    handleDateTo = (rawDate, formattedDate) => {
-        this.search.date_to = formattedDate;
+    handleMonth = month => {
+        this.search.month = month;
         this.updateSearch();
     };
 
     handleClearSearch = () => {
-        this.search = {search: '', date_from: '', date_to: ''};
+        this.search = {search: '', month: ''};
         this.updateSearch();
     };
 
@@ -59,11 +53,9 @@ class SummaryPanel extends Component {
     render() {
         return <div>
             <FilterView text={this.search.search || ''}
-                        date_from={this.search.date_from}
-                        date_to={this.search.date_to}
+                        month={this.props.search.month || ''}
                         onSearchChange={this.handleText}
-                        onDateFromChange={this.handleDateFrom}
-                        onDateToChange={this.handleDateTo}
+                        onMonthChange={this.handleMonth}
                         onClearSearch={this.handleClearSearch}
             />
             {'  '}

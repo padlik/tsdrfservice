@@ -5,13 +5,11 @@ import {LIST_SEARCH_CHANGED, SUMMARY_SEARCH_CHANGED} from "redux/actions/searchA
 
 const searchInitialState = {
     summary_search: {
-        date_from: '',
-        date_to: '',
+        month: '',
         search: ''
     },
     list_search: {
-        date_from: '',
-        date_to: '',
+        month: '',
         search: '',
         userid: ''
     }

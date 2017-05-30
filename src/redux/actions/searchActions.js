@@ -7,38 +7,39 @@ import {summaryRequestFinished} from "redux/actions/summaryActions";
 import {detailRequestFinished} from "redux/actions/detailActions";
 export const SUMMARY_SEARCH_CHANGED = 'SUMMARY_SEARCH_CHANGED';
 export const LIST_SEARCH_CHANGED = 'LIST_SEARCH_CHANGED';
+import {weekOfMonth, defaultMonth, borderOfMonth, toSqlDate} from "utils/dateUtils";
+
 
 export function summarySearchChanged(state) {
-    let {search, date_from, date_to} = state;
+    let {search, month} = state;
+    month = (month) ? month : defaultMonth();
     return {
         type: SUMMARY_SEARCH_CHANGED,
         summary_search: {
             search: search,
-            date_from: date_from,
-            date_to: date_to
+            month: month
         }
     }
 }
 
 export function summarySearchClear() {
+    let defMonth = defaultMonth();
     return {
         type: SUMMARY_SEARCH_CHANGED,
         summary_search: {
             search: '',
-            date_from: '',
-            date_to: ''
+            month: defMonth,
         }
     }
 }
 
 export function listSearchChanged(params) {
-    let {search, date_from, date_to, userid} = params;
+    let {search, month, userid} = params;
     return {
         type: LIST_SEARCH_CHANGED,
         list_search: {
             search: search,
-            date_from: date_from,
-            date_to: date_to,
+            month: month,
             userid: userid
         }
     }
@@ -50,16 +51,17 @@ const apiUrl = `//localhost:8000/api/`;
 export function apiRequestSummary() {
     return (dispatch, getState) => {
         let state = getState();
-        let {search, date_from, date_to} = state.search.summary_search;
+        let {search, month} = state.search.summary_search;
         let url = apiUrl + `users/?format=json`;
+        let {first, last} = borderOfMonth(month);
         if (search) {
             url += `&search=${search}`
         }
-        if (date_from) {
-            url += `&date_from=${date_from}`
+        if (first) {
+            url += `&date_from=${toSqlDate(first)}`
         }
-        if (date_to) {
-            url += `&date_to=${date_to}`
+        if (last) {
+            url += `&date_to=${toSqlDate(last)}`
         }
         dispatch(isLoading(true));
         return fetchJson(url, {})
@@ -72,16 +74,17 @@ export function apiRequestSummary() {
 export function apiRequestDetail() {
     return (dispatch, getState) => {
         let state = getState();
-        let {userid, search, date_from, date_to} = state.search.list_search;
+        let {userid, search, month} = state.search.list_search;
         let url = apiUrl + `users/${userid}/?format=json`;
+        let {first, last} = borderOfMonth(month);
         if (search) {
             url += `&search=${search}`
         }
-        if (date_from) {
-            url += `&date_from=${date_from}`
+        if (first) {
+            url += `&date_from=${toSqlDate(first)}`
         }
-        if (date_to) {
-            url += `&date_to=${date_to}`
+        if (last) {
+            url += `&date_to=${toSqlDate(last)}`
         }
         dispatch(isLoading(true));
         return fetchJson(url, {})

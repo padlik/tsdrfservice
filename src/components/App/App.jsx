@@ -9,7 +9,7 @@ import SummaryPanel from "components/SummaryPanel";
 import ListViewPanel from "components/ListViewPanel";
 import LoadingOverlay from "components/LoadingOverlay";
 import {connect} from 'react-redux';
-import {apiRequestSummary} from "redux/actions/searchActions";
+import {apiRequestSummary, summarySearchClear} from "redux/actions/searchActions";
 import {bindActionCreators} from "redux";
 
 import "./bootstrap.css";
@@ -20,7 +20,10 @@ import "./loader.css";
 class App extends Component {
 
     componentDidMount() {
-        if (this.props.data.length === 0) this.props.actions.apiRequestSummary();
+        if (this.props.data.length === 0) {
+            this.props.actions.summarySearchClear();
+            this.props.actions.apiRequestSummary();
+        }
     }
 
     render() {
@@ -63,7 +66,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators({apiRequestSummary}, dispatch)
+    actions: bindActionCreators({apiRequestSummary, summarySearchClear}, dispatch)
 });
 
 
