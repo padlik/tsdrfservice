@@ -29,7 +29,6 @@ class App extends Component {
         }
     }
 
-    /**TODO: Render search panel separately, reformat bootstrap layout to handle search in navbar**/
     render() {
         return (
             <BrowserRouter>
