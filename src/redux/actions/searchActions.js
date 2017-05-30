@@ -5,9 +5,9 @@ import {DETAIL_LIST_VIEW, isError, isLoading, SUMMARY_VIEW} from "redux/actions/
 import {fetchJson, replaceErrors} from "utils/fetchJson";
 import {summaryRequestFinished} from "redux/actions/summaryActions";
 import {detailRequestFinished} from "redux/actions/detailActions";
+import {borderOfMonth, defaultMonth, toSqlDate, weekOfMonth} from "utils/dateUtils";
 export const SUMMARY_SEARCH_CHANGED = 'SUMMARY_SEARCH_CHANGED';
 export const LIST_SEARCH_CHANGED = 'LIST_SEARCH_CHANGED';
-import {weekOfMonth, defaultMonth, borderOfMonth, toSqlDate} from "utils/dateUtils";
 
 
 export function summarySearchChanged(state) {

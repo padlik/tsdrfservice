@@ -19,7 +19,7 @@ export function weekOfMonth(dateValue) {
 export function defaultMonth() {
     let d = new Date(),
         w = weekOfMonth(d),
-        m = (w < 2) ? d.getMonth() :  d.getMonth() + 1,
+        m = (w < 2) ? d.getMonth() : d.getMonth() + 1,
         y = d.getFullYear();
     return `${y}-${('0' + m).slice(-2)}`;
 
@@ -34,6 +34,6 @@ export function borderOfMonth(month) {
     return {first: fd, last: ld};
 }
 
-export function toSqlDate(date){
+export function toSqlDate(date) {
     return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 }

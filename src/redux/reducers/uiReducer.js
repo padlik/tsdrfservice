@@ -1,7 +1,14 @@
 /**
  * Created by paul on 5/17/17.
  */
-import {ACTIVE_VIEW_CHANGED, DETAIL_LIST_VIEW, ON_ERROR, ON_LOADING, ON_MESSAGE, SUMMARY_VIEW} from "redux/actions/uiActions";
+import {
+    ACTIVE_VIEW_CHANGED,
+    DETAIL_LIST_VIEW,
+    ON_ERROR,
+    ON_LOADING,
+    ON_MESSAGE,
+    SUMMARY_VIEW
+} from "redux/actions/uiActions";
 
 const uiInitialState = {
     view: SUMMARY_VIEW,

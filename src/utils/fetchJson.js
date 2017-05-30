@@ -28,5 +28,7 @@ export function fetchJson(url, options) {
     return fetch(url, options)
         .then(checkStatus)
         .then(parseJSON)
-        .catch((error) => {throw error});
+        .catch((error) => {
+            throw error
+        });
 }
