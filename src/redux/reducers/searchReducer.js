@@ -9,9 +9,7 @@ const searchInitialState = {
         search: ''
     },
     list_search: {
-        month: '',
-        search: '',
-        userid: ''
+        searches: []
     }
 };
 
@@ -22,9 +20,37 @@ export default function (state = searchInitialState, action) {
                 summary_search: action.summary_search
             });
         case LIST_SEARCH_CHANGED:
+            let idx = state.list_search.searches.findIndex(row => row.userid === action.list_search.userid);
+            if (idx === -1) {
+                return Object.assign({}, state, {
+                    list_search: {
+                        searches: [
+                            ...state.list_search.searches.slice(),
+                            {
+                                month: action.list_search.month,
+                                search: action.list_search.search,
+                                userid: action.list_search.userid,
+                                inherit: action.list_search.inherit
+                            },
+                        ]
+                    }
+                });
+            }
             return Object.assign({}, state, {
-                list_search: action.list_search
+                list_search: {
+                    searches: [
+                        ...state.list_search.searches.slice(0, idx),
+                        {
+                            month: action.list_search.month,
+                            search: action.list_search.search,
+                            userid: action.list_search.userid,
+                            inherit: action.list_search.inherit
+                        },
+                        ...state.list_search.searches.slice(idx + 1)
+                    ]
+                }
             });
+
         default:
             return state;
     }

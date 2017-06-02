@@ -1,7 +1,7 @@
 /**
  * Created by paul on 5/4/17.
  */
-import React, {Component} from "react";
+import React, {Component, PropTypes} from "react";
 import Row from "react-bootstrap/lib/Row";
 import Col from "react-bootstrap/lib/Col";
 import Grid from "react-bootstrap/lib/Grid";
@@ -11,6 +11,7 @@ import SummaryPanel from "components/SummaryPanel";
 import ListViewPanel from "components/ListViewPanel";
 import FilterPanel from "components/FilterPanel";
 import LoadingOverlay from "components/LoadingOverlay";
+import DetailFilterPanel from "components/DetailFilterPanel";
 import {connect} from "react-redux";
 import {apiRequestSummary, summarySearchClear} from "redux/actions/searchActions";
 import {bindActionCreators} from "redux";
@@ -19,6 +20,13 @@ import "./bootstrap.css";
 import "./react-bootstrap-table.min.css";
 import "./loader.css";
 
+
+//TODO separate state for every detail view
+
+//TODO: https://medium.com/@Scarysize/syncing-redux-stores-across-browser-tabs-fff04f975423
+//Storage for actions to support tabs
+
+//TODO: Cashing and updating
 
 class App extends Component {
 
@@ -42,15 +50,16 @@ class App extends Component {
                             </Navbar.Header>
                             <Navbar.Collapse>
                                 <Navbar.Form pullLeft>
-                                    <FilterPanel />
+                                    <Route exact path="/" component={FilterPanel}/>
+                                     <Route path="/ts/:userid" component={DetailFilterPanel}/>
                                 </Navbar.Form>
                                 <Navbar.Text pullRight>
                                     {(this.props.ui.loading) ? 'Loading...' : ((this.props.ui.errors.message) ? this.props.ui.errors.message : 'Success')}
                                 </Navbar.Text>
                             </Navbar.Collapse>
                         </Navbar>
-                        <LoadingOverlay isLoading={this.props.ui.loading}/>
                         <Grid>
+                            <LoadingOverlay isLoading={this.props.ui.loading}/>
                             <Switch>
                                 <Route exact path="/" component={SummaryPanel}/>
                                 <Route path="/ts/:userid" component={ListViewPanel}/>
@@ -63,6 +72,11 @@ class App extends Component {
     }
 }
 
+App.PropTypes = {
+    ui: PropTypes.object.isRequired,
+    data: PropTypes.array.isRequired,
+    actions: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
     ui: state.ui,

@@ -34,13 +34,16 @@ export function summarySearchClear() {
 }
 
 export function listSearchChanged(params) {
-    let {search, month, userid} = params;
+    let {search, month, userid, inherit} = params;
+    console.log("In changed");
+    console.dir(params);
     return {
         type: LIST_SEARCH_CHANGED,
         list_search: {
             search: search,
             month: month,
-            userid: userid
+            userid: userid,
+            inherit: inherit
         }
     }
 }
@@ -71,10 +74,12 @@ export function apiRequestSummary() {
     }
 }
 
-export function apiRequestDetail() {
+export function apiRequestDetail(userId) {
     return (dispatch, getState) => {
         let state = getState();
-        let {userid, search, month} = state.search.list_search;
+        let {userid, search, month} = state.search.list_search.searches.filter(row => {
+            return (row.userid === userId)
+        })[0];
         let url = apiUrl + `users/${userid}/?format=json`;
         let {first, last} = borderOfMonth(month);
         if (search) {

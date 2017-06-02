@@ -8,8 +8,7 @@ function checkStatus(response) {
     if (response.ok) {
         return response;
     } else {
-        const error = new Error(response.statusText);
-        throw error;
+        throw new Error(response.statusText);
     }
 }
 

@@ -22,8 +22,8 @@ class UserListView(generics.ListAPIView):
         date_from = self.request.query_params.get('date_from', None)
         date_to = self.request.query_params.get('date_to', None)
         q = """
-           SELECT  sum_t FROM 
-          (SELECT userid, SUM(time_spent) sum_t FROM
+           SELECT  IFNULL(sum_t, 0) FROM 
+          (SELECT userid, SUM(IFNULL(time_spent,0)) sum_t FROM
            timesheets JOIN users ON users.id = timesheets.userid
            
         """
