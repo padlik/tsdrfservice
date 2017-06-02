@@ -76,12 +76,13 @@ class DetailFilterPanel extends Component {
 
     render() {
         return (
-            <DetailFilterView text={(this.props.detail_search.length === 0) ? this.search.search : this.props.detail_search[0].search}
-                              month={(this.props.detail_search.length === 0) ? this.search.month : this.props.detail_search[0].month}
-                              onSearchChange={this.handleSearchChange}
-                              onMonthChange={this.handleMonthChange}
-                              inheritSearch={(this.props.detail_search.length === 0) ? this.search.inherit : this.props.detail_search[0].inherit}
-                              onInheritSearchChange={this.handleInheritSearchChange}/>
+            <DetailFilterView
+                text={(this.props.detail_search.length === 0) ? this.search.search : this.props.detail_search[0].search}
+                month={(this.props.detail_search.length === 0) ? this.search.month : this.props.detail_search[0].month}
+                onSearchChange={this.handleSearchChange}
+                onMonthChange={this.handleMonthChange}
+                inheritSearch={(this.props.detail_search.length === 0) ? this.search.inherit : this.props.detail_search[0].inherit}
+                onInheritSearchChange={this.handleInheritSearchChange}/>
         )
     }
 

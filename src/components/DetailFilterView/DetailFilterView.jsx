@@ -6,7 +6,6 @@ import FormControl from "react-bootstrap/lib/FormControl";
 import Checkbox from "react-bootstrap/lib/Checkbox";
 
 
-
 class DetailFilterView extends Component {
 
     render() {
@@ -17,16 +16,18 @@ class DetailFilterView extends Component {
                 {' '}&nbsp;
                 <FormControl type="text"
                              placeholder="Search Text"
-                             disabled = {inheritSearch}
+                             disabled={inheritSearch}
                              value={text}
                              onChange={(e) => onSearchChange(e.target.value)}
                 />
                 {'  '}&nbsp;&nbsp;
                 <ControlLabel>Target Month:</ControlLabel>
                 {'  '}&nbsp;
-                <FormControl type="month" value={month} disabled = {inheritSearch} onChange={(e) => onMonthChange(e.target.value)}/>
+                <FormControl type="month" value={month} disabled={inheritSearch}
+                             onChange={(e) => onMonthChange(e.target.value)}/>
                 &nbsp;
-                <Checkbox inline checked={inheritSearch} onChange={(e) => onInheritSearchChange(e)}>Inherit from Summary</Checkbox>
+                <Checkbox inline checked={inheritSearch} onChange={(e) => onInheritSearchChange(e)}>Inherit from
+                    Summary</Checkbox>
             </FormGroup>
         );
     }

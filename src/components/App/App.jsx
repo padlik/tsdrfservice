@@ -51,7 +51,7 @@ class App extends Component {
                             <Navbar.Collapse>
                                 <Navbar.Form pullLeft>
                                     <Route exact path="/" component={FilterPanel}/>
-                                     <Route path="/ts/:userid" component={DetailFilterPanel}/>
+                                    <Route path="/ts/:userid" component={DetailFilterPanel}/>
                                 </Navbar.Form>
                                 <Navbar.Text pullRight>
                                     {(this.props.ui.loading) ? 'Loading...' : ((this.props.ui.errors.message) ? this.props.ui.errors.message : 'Success')}

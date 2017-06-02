@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from "react";
 import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
 import {DETAIL_LIST_VIEW, onMessage, viewChanged} from "redux/actions/uiActions";
 import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
 
