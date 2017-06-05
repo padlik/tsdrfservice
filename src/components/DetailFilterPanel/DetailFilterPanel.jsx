@@ -30,7 +30,7 @@ class DetailFilterPanel extends Component {
         } else {
             this.search = {
                 search: this.props.detail_search[0].search,
-                month: this.props.detail_search[0].month,
+                month: (this.props.detail_search[0].inherit) ? this.props.summary_search.month : this.props.detail_search[0].month,
                 userid: this.props.match.params.userid,
                 inherit: this.props.detail_search[0].inherit
             };
@@ -41,9 +41,6 @@ class DetailFilterPanel extends Component {
 
 
     updateSearch = () => {
-        console.log("In update search");
-        console.dir(this.search);
-        console.dir(this.props);
         this.props.actions.listSearchChanged(this.search);
         this.props.actions.apiRequestDetail(this.props.match.params.userid);
     };

@@ -1,2 +1,3 @@
 # tsdrfservice
-Simple web service for my reporting
+Simple web service for my reporting.
+Also practising in React-Redux

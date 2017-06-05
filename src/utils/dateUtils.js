@@ -21,6 +21,7 @@ export function defaultMonth() {
         w = weekOfMonth(d),
         m = (w < 2) ? d.getMonth() : d.getMonth() + 1,
         y = d.getFullYear();
+    console.log(d, w, m, y);
     return `${y}-${('0' + m).slice(-2)}`;
 
 }

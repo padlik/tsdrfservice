@@ -35,8 +35,6 @@ export function summarySearchClear() {
 
 export function listSearchChanged(params) {
     let {search, month, userid, inherit} = params;
-    console.log("In changed");
-    console.dir(params);
     return {
         type: LIST_SEARCH_CHANGED,
         list_search: {

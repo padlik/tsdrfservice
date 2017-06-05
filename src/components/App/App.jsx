@@ -12,6 +12,7 @@ import ListViewPanel from "components/ListViewPanel";
 import FilterPanel from "components/FilterPanel";
 import LoadingOverlay from "components/LoadingOverlay";
 import DetailFilterPanel from "components/DetailFilterPanel";
+import InfoLabel from "components/InfoLabel";
 import {connect} from "react-redux";
 import {apiRequestSummary, summarySearchClear} from "redux/actions/searchActions";
 import {bindActionCreators} from "redux";
@@ -20,8 +21,6 @@ import "./bootstrap.css";
 import "./react-bootstrap-table.min.css";
 import "./loader.css";
 
-
-//TODO separate state for every detail view
 
 //TODO: https://medium.com/@Scarysize/syncing-redux-stores-across-browser-tabs-fff04f975423
 //Storage for actions to support tabs
@@ -54,7 +53,7 @@ class App extends Component {
                                     <Route path="/ts/:userid" component={DetailFilterPanel}/>
                                 </Navbar.Form>
                                 <Navbar.Text pullRight>
-                                    {(this.props.ui.loading) ? 'Loading...' : ((this.props.ui.errors.message) ? this.props.ui.errors.message : 'Success')}
+                                    <InfoLabel/>
                                 </Navbar.Text>
                             </Navbar.Collapse>
                         </Navbar>

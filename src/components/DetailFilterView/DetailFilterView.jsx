@@ -26,7 +26,7 @@ class DetailFilterView extends Component {
                 <FormControl type="month" value={month} disabled={inheritSearch}
                              onChange={(e) => onMonthChange(e.target.value)}/>
                 &nbsp;
-                <Checkbox inline checked={inheritSearch} onChange={(e) => onInheritSearchChange(e)}>Inherit from
+                <Checkbox inline checked={inheritSearch} onChange={(e) => onInheritSearchChange(e)}>Same as
                     Summary</Checkbox>
             </FormGroup>
         );
