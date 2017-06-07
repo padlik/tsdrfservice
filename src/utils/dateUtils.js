@@ -19,9 +19,8 @@ export function weekOfMonth(dateValue) {
 export function defaultMonth() {
     let d = new Date(),
         w = weekOfMonth(d),
-        m = (w < 2) ? d.getMonth() : d.getMonth() + 1,
+        m = (w < 4) ? d.getMonth() : d.getMonth() + 1,
         y = d.getFullYear();
-    console.log(d, w, m, y);
     return `${y}-${('0' + m).slice(-2)}`;
 
 }

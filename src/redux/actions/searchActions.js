@@ -1,11 +1,12 @@
 /**
  * Created by paul on 5/11/17.
  */
-import {DETAIL_LIST_VIEW, isError, isLoading, SUMMARY_VIEW} from "redux/actions/uiActions";
+import {DETAIL_LIST_VIEW, isError, isLoading, SUMMARY_VIEW, onMessage} from "redux/actions/uiActions";
 import {fetchJson, replaceErrors} from "utils/fetchJson";
-import {summaryRequestFinished} from "redux/actions/summaryActions";
+import {summaryRequestFinished, summaryRequestSubmitted} from "redux/actions/summaryActions";
 import {detailRequestFinished} from "redux/actions/detailActions";
 import {borderOfMonth, defaultMonth, toSqlDate, weekOfMonth} from "utils/dateUtils";
+import stringHash from "utils/stringHash";
 export const SUMMARY_SEARCH_CHANGED = 'SUMMARY_SEARCH_CHANGED';
 export const LIST_SEARCH_CHANGED = 'LIST_SEARCH_CHANGED';
 
@@ -64,11 +65,18 @@ export function apiRequestSummary() {
         if (last) {
             url += `&date_to=${toSqlDate(last)}`
         }
-        dispatch(isLoading(true));
-        return fetchJson(url, {})
-            .then(json => dispatch(summaryRequestFinished(json)))
-            .then(() => dispatch(isLoading(false)))
-            .catch((error) => dispatch(isError(error)));
+        let searchHash = stringHash(search, first, last);
+        if (searchHash !== state.summary.search_hash) {
+            dispatch(isLoading(true));
+            dispatch(onMessage(''));
+            return fetchJson(url, {})
+                .then(json => dispatch(summaryRequestFinished(json)))
+                .then(() => dispatch(isLoading(false)))
+                .then(() => dispatch(summaryRequestSubmitted(searchHash)))
+                .catch((error) => dispatch(isError(error)));
+        } else {
+            dispatch(onMessage("cached"));
+        }
     }
 }
 

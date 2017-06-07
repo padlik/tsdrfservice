@@ -21,7 +21,8 @@ export function viewChanged(view) {
 export function isLoading(loading) {
     return {
         type: ON_LOADING,
-        loading: loading
+        loading: loading,
+        message: ''
     }
 
 }
@@ -30,7 +31,8 @@ export function isError(error) {
     console.dir(error);
     return {
         type: ON_ERROR,
-        errors: error
+        errors: error,
+        message: ''
     }
 }
 

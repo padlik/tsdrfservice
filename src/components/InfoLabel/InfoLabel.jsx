@@ -10,7 +10,7 @@ class InfoLabel extends Component {
             <span>{(this.props.ui.loading) ? <Label
                 bsStyle="default">Loading...</Label> : ((this.props.ui.errors.message) ?
                 <Label bsStyle="danger"> {this.props.ui.errors.message} </Label> :
-                <Label bsStyle="success">Success</Label>)}</span>
+                <Label bsStyle="success">{this.props.ui.message ? this.props.ui.message : 'Success' }</Label>)}</span>
 
         )
     }
