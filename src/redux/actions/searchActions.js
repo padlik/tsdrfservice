@@ -1,12 +1,13 @@
 /**
  * Created by paul on 5/11/17.
  */
-import {DETAIL_LIST_VIEW, isError, isLoading, SUMMARY_VIEW, onMessage} from "redux/actions/uiActions";
+import {DETAIL_LIST_VIEW, isError, isLoading, onMessage, SUMMARY_VIEW} from "redux/actions/uiActions";
 import {fetchJson, replaceErrors} from "utils/fetchJson";
 import {summaryRequestFinished, summaryRequestSubmitted} from "redux/actions/summaryActions";
 import {detailRequestFinished} from "redux/actions/detailActions";
 import {borderOfMonth, defaultMonth, toSqlDate, weekOfMonth} from "utils/dateUtils";
 import stringHash from "utils/stringHash";
+import {API_URL, REQ_FORMAT, USER_EP} from "utils/const";
 export const SUMMARY_SEARCH_CHANGED = 'SUMMARY_SEARCH_CHANGED';
 export const LIST_SEARCH_CHANGED = 'LIST_SEARCH_CHANGED';
 
@@ -47,14 +48,12 @@ export function listSearchChanged(params) {
     }
 }
 
-const apiUrl = `//localhost:8000/api/`;
-
 
 export function apiRequestSummary() {
     return (dispatch, getState) => {
         let state = getState();
         let {search, month} = state.search.summary_search;
-        let url = apiUrl + `users/?format=json`;
+        let url = API_URL + USER_EP + REQ_FORMAT;
         let {first, last} = borderOfMonth(month);
         if (search) {
             url += `&search=${search}`
@@ -66,7 +65,7 @@ export function apiRequestSummary() {
             url += `&date_to=${toSqlDate(last)}`
         }
         let searchHash = stringHash(search, first, last);
-        if (searchHash !== state.summary.search_hash) {
+        if (searchHash !== state.summary.search_hash || state.summary.invalid) {
             dispatch(isLoading(true));
             dispatch(onMessage(''));
             return fetchJson(url, {})
@@ -75,7 +74,7 @@ export function apiRequestSummary() {
                 .then(() => dispatch(summaryRequestSubmitted(searchHash)))
                 .catch((error) => dispatch(isError(error)));
         } else {
-            dispatch(onMessage("cached"));
+            return dispatch(onMessage("cached"));
         }
     }
 }
@@ -86,7 +85,7 @@ export function apiRequestDetail(userId) {
         let {userid, search, month} = state.search.list_search.searches.filter(row => {
             return (row.userid === userId)
         })[0];
-        let url = apiUrl + `users/${userid}/?format=json`;
+        let url = API_URL + USER_EP + `/${userid}` + REQ_FORMAT;
         let {first, last} = borderOfMonth(month);
         if (search) {
             url += `&search=${search}`
@@ -97,10 +96,23 @@ export function apiRequestDetail(userId) {
         if (last) {
             url += `&date_to=${toSqlDate(last)}`
         }
-        dispatch(isLoading(true));
-        return fetchJson(url, {})
-            .then(json => dispatch(detailRequestFinished(userid, json)))
-            .then(() => dispatch(isLoading(false)))
-            .catch((error) => dispatch(isError(error)));
+        let searchHash = stringHash(search, first, last);
+
+        let detail = state.detail.details.filter(row => {
+            return (row.userid === userId)
+        });
+
+        let currentHash = (detail.length !== 0) ? detail[0].search_hash : '';
+
+        if (searchHash !== currentHash) {
+            dispatch(isLoading(true));
+            dispatch(onMessage(''));
+            return fetchJson(url, {})
+                .then(json => dispatch(detailRequestFinished(userid, json, searchHash)))
+                .then(() => dispatch(isLoading(false)))
+                .catch((error) => dispatch(isError(error)));
+        } else {
+            dispatch(onMessage("cached"));
+        }
     }
-}
+};

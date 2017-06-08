@@ -7,6 +7,7 @@ import {
     ON_ERROR,
     ON_LOADING,
     ON_MESSAGE,
+    ON_OVERALL_UPDATED,
     SUMMARY_VIEW
 } from "redux/actions/uiActions";
 
@@ -14,7 +15,8 @@ const uiInitialState = {
     view: SUMMARY_VIEW,
     loading: false,
     errors: {},
-    message: ''
+    message: '',
+    overall: {timesheets: 0}
 };
 
 export default function (state = uiInitialState, action) {
@@ -27,18 +29,24 @@ export default function (state = uiInitialState, action) {
             });
         case ON_LOADING:
             return Object.assign({}, state, {
+                message: '',
                 loading: action.loading,
                 errors: {}
             });
         case ON_ERROR:
             return Object.assign({}, state, {
                 loading: false,
+                message: '',
                 errors: action.errors
             });
         case ON_MESSAGE:
             return Object.assign({}, state, {
                 message: action.message,
                 errors: {}
+            });
+        case ON_OVERALL_UPDATED:
+            return Object.assign({}, state, {
+                overall: action.json
             });
         default:
             return state;

@@ -4,7 +4,7 @@
 
 export const SUMMARY_REQ_FINISHED = 'SUMMARY_REQ_FINISHED';
 export const SUMMARY_REQ_SUBMITTED = 'SUMMARY_REQ_SUBMITTED';
-
+export const SUMMARY_INVALIDATE = 'SUMMARY_INVALIDATE';
 
 export function summaryRequestFinished(jsonResult) {
     return {
@@ -21,3 +21,9 @@ export function summaryRequestSubmitted(searchHash) {
     }
 }
 
+export function summaryInvalidate(isInvalid) {
+    return {
+        type: SUMMARY_INVALIDATE,
+        invalid: isInvalid
+    }
+}

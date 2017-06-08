@@ -6,6 +6,7 @@ import Row from "react-bootstrap/lib/Row";
 import Col from "react-bootstrap/lib/Col";
 import Grid from "react-bootstrap/lib/Grid";
 import Navbar from "react-bootstrap/lib/Navbar";
+import Panel from "react-bootstrap/lib/Panel";
 import {BrowserRouter, Link, Route, Switch} from "react-router-dom";
 import SummaryPanel from "components/SummaryPanel";
 import ListViewPanel from "components/ListViewPanel";
@@ -58,6 +59,7 @@ class App extends Component {
                             </Navbar.Collapse>
                         </Navbar>
                         <Grid>
+                            <Panel>Hey</Panel>
                             <LoadingOverlay isLoading={this.props.ui.loading}/>
                             <Switch>
                                 <Route exact path="/" component={SummaryPanel}/>

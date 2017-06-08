@@ -13,7 +13,7 @@ function realHash(s) {
     return hash;
 }
 
-export default function stringHash (...args) {
+export default function stringHash(...args) {
     let str = '';
     for (let arg of args) str += arg.toString();
     return realHash(str);

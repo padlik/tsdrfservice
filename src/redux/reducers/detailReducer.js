@@ -18,7 +18,9 @@ export default function (state = detailInitialState, action) {
                         ...state.details.slice(),
                         {
                             userid: action.userid,
-                            sheets: action.sheets
+                            search_hash: action.search_hash,
+                            sheets: action.sheets,
+                            invalid: false
                         },
                     ]
                 }
@@ -30,7 +32,9 @@ export default function (state = detailInitialState, action) {
                     ...state.details.slice(0, idx),
                     {
                         userid: action.userid,
-                        sheets: action.sheets
+                        search_hash: action.search_hash,
+                        sheets: action.sheets,
+                        invalid: false
                     },
                     ...state.details.slice(idx + 1),
                 ]

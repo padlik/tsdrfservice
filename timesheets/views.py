@@ -1,8 +1,12 @@
 # Create your views here.
 import django_filters
+from django.db.models import Sum
 from django.views.generic import TemplateView
 from rest_framework import filters
 from rest_framework import generics
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .models import Timesheets
 from .models import Users
@@ -64,6 +68,17 @@ class TimesheetsView(generics.ListAPIView):
         if user is not None:
             return Timesheets.objects.filter(userid__sugar_uname=user)
         return Timesheets.objects.all()
+
+
+class OverallView(APIView):
+    def get(self, request):
+        result = {'users': Users.objects.all().count(),
+                  'timesheets': Timesheets.objects.aggregate(Sum('time_spent')).get('time_spent__sum', 0), 'sources': {
+                'sourceSI': Timesheets.objects.exclude(source__icontains='JIRA').aggregate(Sum('time_spent')).get(
+                    'time_spent__sum', 0),
+                'sourceJIRA': Timesheets.objects.filter(source__icontains='JIRA').aggregate(Sum('time_spent')).get(
+                    'time_spent__sum', 0)}}
+        return Response(result, status=status.HTTP_200_OK)
 
 
 class IndexTemplateView(TemplateView):

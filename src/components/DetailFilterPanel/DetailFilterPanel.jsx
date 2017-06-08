@@ -47,7 +47,6 @@ class DetailFilterPanel extends Component {
 
 
     handleInheritSearchChange = (e) => {
-        e.preventDefault();
         this.search.inherit = !this.search.inherit;
         if (this.search.inherit) {
             this.search.search = '';
