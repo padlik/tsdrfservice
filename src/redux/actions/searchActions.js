@@ -3,7 +3,7 @@
  */
 import {DETAIL_LIST_VIEW, isError, isLoading, onMessage, SUMMARY_VIEW} from "redux/actions/uiActions";
 import {fetchJson, replaceErrors} from "utils/fetchJson";
-import {summaryRequestFinished, summaryRequestSubmitted} from "redux/actions/summaryActions";
+import {summaryRequestFinished, summaryRequestSubmitted, summaryInvalidate} from "redux/actions/summaryActions";
 import {detailRequestFinished} from "redux/actions/detailActions";
 import {borderOfMonth, defaultMonth, toSqlDate, weekOfMonth} from "utils/dateUtils";
 import stringHash from "utils/stringHash";
@@ -72,6 +72,7 @@ export function apiRequestSummary() {
                 .then(json => dispatch(summaryRequestFinished(json)))
                 .then(() => dispatch(isLoading(false)))
                 .then(() => dispatch(summaryRequestSubmitted(searchHash)))
+                .then(() => dispatch(summaryInvalidate(false)))
                 .catch((error) => dispatch(isError(error)));
         } else {
             return dispatch(onMessage("cached"));

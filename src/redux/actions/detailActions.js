@@ -3,7 +3,7 @@
  */
 
 export const DETAIL_REQ_FINISHED = 'DETAIL_REQ_FINISHED';
-
+export const DETAIL_INVALIDATED = 'DETAIL_INVALIDATED';
 
 export function detailRequestFinished(userid, json, hash) {
     return {
@@ -12,5 +12,13 @@ export function detailRequestFinished(userid, json, hash) {
         userid: userid,
         sheets: json
     };
+}
+
+export function detailInvalidated(userId, invalid) {
+    return {
+        type: DETAIL_INVALIDATED,
+        userid: userId,
+        invalid: invalid
+    }
 }
 

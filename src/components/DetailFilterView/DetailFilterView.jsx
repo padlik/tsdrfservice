@@ -12,7 +12,7 @@ class DetailFilterView extends Component {
         const {text, month, onSearchChange, onMonthChange, inheritSearch, onInheritSearchChange} = this.props;
         return (
             <FormGroup controlId="formSearchText">
-                <ControlLabel>Timesheet Search:</ControlLabel>
+                <ControlLabel>Search:</ControlLabel>
                 {' '}&nbsp;
                 <FormControl type="text"
                              placeholder="Search Text"

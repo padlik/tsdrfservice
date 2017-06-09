@@ -7,7 +7,7 @@ import Col from "react-bootstrap/lib/Col";
 import Grid from "react-bootstrap/lib/Grid";
 import Navbar from "react-bootstrap/lib/Navbar";
 import Panel from "react-bootstrap/lib/Panel";
-import {BrowserRouter, Link, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Link, Route, Switch, HashRouter} from "react-router-dom";
 import SummaryPanel from "components/SummaryPanel";
 import ListViewPanel from "components/ListViewPanel";
 import FilterPanel from "components/FilterPanel";
@@ -17,6 +17,7 @@ import InfoLabel from "components/InfoLabel";
 import {connect} from "react-redux";
 import {apiRequestSummary, summarySearchClear} from "redux/actions/searchActions";
 import {bindActionCreators} from "redux";
+import scheduler from "redux/actions/scheduler";
 
 import "./bootstrap.css";
 import "./react-bootstrap-table.min.css";
@@ -88,5 +89,8 @@ const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators({apiRequestSummary, summarySearchClear}, dispatch)
 });
 
+
+//Disabled so will not flood the redux state
+//scheduler();
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

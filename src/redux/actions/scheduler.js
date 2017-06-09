@@ -1,10 +1,26 @@
 import {API_URL, OVERALL_EP, REFRESH_INTERVAL, REQ_FORMAT} from "utils/const";
+import {fetchJson} from "utils/fetchJson";
+import configureStore from "redux/configureStore";
+import {isError, onMessage, onOverallUpdated} from "redux/actions/uiActions";
+import {summaryInvalidate} from "redux/actions/summaryActions";
 
-const schedulerUrl = `//localhost:8000/api/overall`;
 
 export default function () {
     console.log("Starting scheduler");
-    window.setInterval(() => {
-
-    }, REFRESH_INTERVAL);
+    window.setInterval(
+        () => {
+            let store = configureStore();
+            let url = API_URL + OVERALL_EP + REQ_FORMAT;
+            fetchJson(url, {})
+                .then(json => {
+                    let curTsCount = store.getState().ui.overall.timesheets;
+                    store.dispatch(onOverallUpdated(json));
+                    if (curTsCount !== json.timesheets && curTsCount !== -1) {
+                        store.dispatch(summaryInvalidate(true)); //set invalidate flag
+                        console.log('Invalidate logic should go there...');
+                    }
+                })
+                .catch(error => store.dispatch(isError(error)))
+        },
+        REFRESH_INTERVAL);
 }

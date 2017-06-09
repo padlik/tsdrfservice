@@ -16,7 +16,7 @@ const uiInitialState = {
     loading: false,
     errors: {},
     message: '',
-    overall: {timesheets: 0}
+    overall: {timesheets: -1}
 };
 
 export default function (state = uiInitialState, action) {
