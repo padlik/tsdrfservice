@@ -3,7 +3,7 @@
  */
 import {DETAIL_LIST_VIEW, isError, isLoading, onMessage, SUMMARY_VIEW} from "redux/actions/uiActions";
 import {fetchJson, replaceErrors} from "utils/fetchJson";
-import {summaryRequestFinished, summaryRequestSubmitted, summaryInvalidate} from "redux/actions/summaryActions";
+import {summaryInvalidate, summaryRequestFinished, summaryRequestSubmitted} from "redux/actions/summaryActions";
 import {detailRequestFinished} from "redux/actions/detailActions";
 import {borderOfMonth, defaultMonth, toSqlDate, weekOfMonth} from "utils/dateUtils";
 import stringHash from "utils/stringHash";

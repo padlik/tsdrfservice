@@ -35,7 +35,7 @@ class DetailFilterPanel extends Component {
                 inherit: this.props.detail_search[0].inherit
             };
         }
-        
+
         this.updateSearch();
     }
 

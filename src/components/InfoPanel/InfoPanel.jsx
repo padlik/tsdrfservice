@@ -21,8 +21,8 @@ const mapStateToProps = (state, ownProps) => {
     if (details.length) {
         stat = details[0].sheets.reduce(
             (stat, ts) => {
-                let desc = ts.description === null? "" : ts.description;
-                let src = ts.source === null? "": ts.source;
+                let desc = ts.description === null ? "" : ts.description;
+                let src = ts.source === null ? "" : ts.source;
                 stat.total += ts.time_spent;
                 if (desc.indexOf(`vertime:`) !== -1) {
                     stat.overtime += ts.time_spent;

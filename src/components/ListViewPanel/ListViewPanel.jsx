@@ -44,7 +44,7 @@ const mapStateToProps = (state, ownProps) => {
         return row.sugar_uname === ownProps.match.params.userid
     });
 
-    if (summary.length){
+    if (summary.length) {
         stat.fullName = summary[0].full_name;
     }
 
