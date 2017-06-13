@@ -17,4 +17,5 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Users
-        fields = ('id', 'sugar_id', 'sugar_uname', 'intetics_uname', 'location', 'dissmissed', 'team', 'timesheets_sum')
+        fields = ('id', 'sugar_id', 'sugar_uname', 'intetics_uname', 'full_name', 'location', 'dissmissed', 'team',
+                  'timesheets_sum')

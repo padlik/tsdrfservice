@@ -18,8 +18,8 @@ class UserListView(generics.ListAPIView):
     serializer_class = UserSerializer
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, filters.DjangoFilterBackend,)
     filter_fields = ('team', 'location')
-    search_fields = ('sugar_uname', 'intetics_uname')
-    ordering_fields = ('sugar_uname', 'intetics_uname', 'location', 'team')
+    search_fields = ('sugar_uname', 'intetics_uname', 'full_name')
+    ordering_fields = ('sugar_uname', 'intetics_uname', 'location', 'team', 'full_name')
     ordering = 'sugar_uname'
 
     def get_queryset(self):

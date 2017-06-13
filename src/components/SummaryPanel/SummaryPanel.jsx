@@ -9,15 +9,15 @@ import {Link} from "react-router-dom";
 class SummaryPanel extends Component {
 
 
-    linkFormatter(cell) {
-        return <Link to={`/ts/${cell}`}>{cell}</Link>
+    linkFormatter(cell, row) {
+        return <Link to={`/ts/${row.sugar_uname}`}>{cell}</Link>
     }
 
     render() {
         return (
             <BootstrapTable data={this.props.summary.summary} striped hover condensed>
                 <TableHeaderColumn isKey dataField='id' hidden>#</TableHeaderColumn>
-                <TableHeaderColumn dataField='sugar_uname' width='40%' dataSort={ true }
+                <TableHeaderColumn dataField='full_name' width='40%' dataSort={ true }
                                    dataFormat={this.linkFormatter}>Sugar Name</TableHeaderColumn>
                 <TableHeaderColumn dataField='team' width='20%' dataSort={ true }>Team</TableHeaderColumn>
                 <TableHeaderColumn dataField='timesheets_sum' dataSort={ true }>Hrs.</TableHeaderColumn>

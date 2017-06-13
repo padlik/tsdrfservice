@@ -17,7 +17,10 @@ import InfoLabel from "components/InfoLabel";
 import {connect} from "react-redux";
 import {apiRequestSummary, summarySearchClear} from "redux/actions/searchActions";
 import {bindActionCreators} from "redux";
+import InfoPanel from "components/InfoPanel";
 import scheduler from "redux/actions/scheduler";
+
+
 
 import "./bootstrap.css";
 import "./react-bootstrap-table.min.css";
@@ -60,7 +63,6 @@ class App extends Component {
                             </Navbar.Collapse>
                         </Navbar>
                         <Grid>
-                            <Panel>Hey</Panel>
                             <LoadingOverlay isLoading={this.props.ui.loading}/>
                             <Switch>
                                 <Route exact path="/" component={SummaryPanel}/>
