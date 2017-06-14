@@ -4,19 +4,19 @@
 import fetch from "isomorphic-fetch";
 
 
-function checkStatus(response) {
+const checkStatus = (response) => {
     if (response.ok) {
         return response;
     } else {
         throw new Error(response.statusText);
     }
-}
+};
 
-function parseJSON(response) {
+const parseJSON = (response) => {
     return response.json();
-}
+};
 
-export function fetchJson(url, options) {
+export const fetchJson = (url, options) => {
     options.headers = Object.assign({
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -30,4 +30,4 @@ export function fetchJson(url, options) {
         .catch((error) => {
             throw error
         });
-}
+};

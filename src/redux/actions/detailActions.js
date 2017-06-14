@@ -5,7 +5,7 @@
 export const DETAIL_REQ_FINISHED = 'DETAIL_REQ_FINISHED';
 export const DETAIL_INVALIDATED = 'DETAIL_INVALIDATED';
 
-export function detailRequestFinished(userid, json, hash) {
+export const detailRequestFinished = (userid, json, hash) => {
     return {
         type: DETAIL_REQ_FINISHED,
         search_hash: hash,
@@ -14,7 +14,7 @@ export function detailRequestFinished(userid, json, hash) {
     };
 }
 
-export function detailInvalidated(userId, invalid) {
+export const detailInvalidated = (userId, invalid) => {
     return {
         type: DETAIL_INVALIDATED,
         userid: userId,

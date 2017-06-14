@@ -14,46 +14,43 @@ export const SUMMARY_VIEW = 'SUMMARY_VIEW';
 export const DETAIL_LIST_VIEW = 'DETAIL_LIST_VIEW';
 
 
-export function viewChanged(view) {
+export const viewChanged = (view) => {
     return {
         type: ACTIVE_VIEW_CHANGED,
         view: view
     }
-}
+};
 
-export function isLoading(loading) {
+export const isLoading = (loading) => {
     return {
         type: ON_LOADING,
         loading: loading,
         message: ''
     }
 
-}
+};
 
-export function isError(error) {
+export const isError = (error) => {
     console.dir(error);
     return {
         type: ON_ERROR,
         errors: error,
         message: ''
     }
-}
+};
 
-export function onMessage(msg) {
+export const onMessage = (msg) => {
     return {
         type: ON_MESSAGE,
         message: msg
     }
-}
+};
 
-export function onOverallUpdated(json) {
+export const onOverallUpdated = (json) => {
     return {
         type: ON_OVERALL_UPDATED,
         json: json
     }
-}
+};
 
 
-export function updateOverallStatus() {
-
-}

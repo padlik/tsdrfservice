@@ -6,10 +6,8 @@ import FormControl from "react-bootstrap/lib/FormControl";
 import Checkbox from "react-bootstrap/lib/Checkbox";
 
 
-class DetailFilterView extends Component {
+const DetailFilterView = ({text, month, onSearchChange, onMonthChange, inheritSearch, onInheritSearchChange}) =>  {
 
-    render() {
-        const {text, month, onSearchChange, onMonthChange, inheritSearch, onInheritSearchChange} = this.props;
         return (
             <FormGroup controlId="formSearchText">
                 <ControlLabel>Search:</ControlLabel>
@@ -30,9 +28,9 @@ class DetailFilterView extends Component {
                     Summary</Checkbox>
             </FormGroup>
         );
-    }
 
-}
+
+};
 
 DetailFilterView.propTypes = {
     text: PropTypes.string,

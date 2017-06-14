@@ -10,7 +10,7 @@ const summaryInitialState = {
     invalid: false
 };
 
-export default function (state = summaryInitialState, action) {
+const summaryReducer = (state = summaryInitialState, action) => {
     switch (action.type) {
         case SUMMARY_REQ_FINISHED:
             return Object.assign({}, state, {summary: action.summary});
@@ -22,4 +22,6 @@ export default function (state = summaryInitialState, action) {
             return state;
     }
 
-}
+};
+
+export default summaryReducer;

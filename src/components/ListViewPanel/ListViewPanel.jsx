@@ -1,23 +1,23 @@
-import React, {Component, PropTypes} from "react";
+import React, {PropTypes} from "react";
 import {connect} from "react-redux";
 import {DETAIL_LIST_VIEW, onMessage, viewChanged} from "redux/actions/uiActions";
 import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
 import InfoPanelView from "components/InfoPanelView";
 
-class ListViewPanel extends Component {
+const ListViewPanel = ({details, stat}) => {
 
-    overtimeFormatter(row) {
+    const overtimeFormatter = (row) => {
         return row.description.indexOf(`vertime:`) !== -1 ? 'danger' : 'normal';
-    }
+    };
 
-    render() {
-        return <div>
-            <InfoPanelView fullName={this.props.stat.fullName}
-                           total={this.props.stat.total}
-                           overtime={this.props.stat.overtime}
-                           jira={this.props.stat.jira}/>
-            <BootstrapTable data={(!this.props.details.length) ? [] : this.props.details[0].sheets} striped hover
-                            condensed trClassName={this.overtimeFormatter}>
+
+    return ( <div>
+            <InfoPanelView fullName={stat.fullName}
+                           total={stat.total}
+                           overtime={stat.overtime}
+                           jira={stat.jira}/>
+            <BootstrapTable data={(!details.length) ? [] : details[0].sheets} striped hover
+                            condensed trClassName={overtimeFormatter}>
                 <TableHeaderColumn isKey dataField='key' hidden>#</TableHeaderColumn>
                 <TableHeaderColumn dataField='activity_date' width='8%' dataSort={ true }>Date</TableHeaderColumn>
                 <TableHeaderColumn dataField='name' dataSort={ true }>Name</TableHeaderColumn>
@@ -26,21 +26,22 @@ class ListViewPanel extends Component {
                 <TableHeaderColumn dataField='description'>Description</TableHeaderColumn>
             </BootstrapTable>
         </div>
-    }
-}
+    )
+};
+
 
 ListViewPanel.PropTypes = {
     details: PropTypes.node
 };
 
 const mapStateToProps = (state, ownProps) => {
-    let details = state.detail.details.filter(row => {
+    const details = state.detail.details.filter(row => {
         return row.userid === ownProps.match.params.userid
     });
 
     let stat = {fullName: "", total: 0, overtime: 0, jira: 0};
 
-    let summary = state.summary.summary.filter(row => {
+    const summary = state.summary.summary.filter(row => {
         return row.sugar_uname === ownProps.match.params.userid
     });
 

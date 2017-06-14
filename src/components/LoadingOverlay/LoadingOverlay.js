@@ -3,6 +3,8 @@
  */
 import React from "react";
 
-export default ({isLoading}) => <div>
+const LoadingOverlay = ({isLoading}) => <div>
     {isLoading ? <div id="loader"/> : null}
-</div>
+</div>;
+
+export default LoadingOverlay;

@@ -5,7 +5,7 @@ import {isError, onMessage, onOverallUpdated} from "redux/actions/uiActions";
 import {summaryInvalidate} from "redux/actions/summaryActions";
 
 
-export default function () {
+const scheduler = () => {
     console.log("Starting scheduler");
     window.setInterval(
         () => {
@@ -23,4 +23,6 @@ export default function () {
                 .catch(error => store.dispatch(isError(error)))
         },
         REFRESH_INTERVAL);
-}
+};
+
+export default scheduler;

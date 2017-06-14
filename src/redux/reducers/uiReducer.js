@@ -19,7 +19,7 @@ const uiInitialState = {
     overall: {timesheets: -1}
 };
 
-export default function (state = uiInitialState, action) {
+const uiReducer = (state = uiInitialState, action) => {
     switch (action.type) {
         case ACTIVE_VIEW_CHANGED:
             return Object.assign({}, state, {
@@ -51,4 +51,6 @@ export default function (state = uiInitialState, action) {
         default:
             return state;
     }
-}
+};
+
+export default uiReducer;

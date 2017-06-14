@@ -1,20 +1,20 @@
-import React, {Component, PropTypes} from "react";
+import React, {PropTypes} from "react";
 import Label from "react-bootstrap/lib/Label";
 import {connect} from "react-redux";
 
 
-class InfoLabel extends Component {
-    render() {
-        return (
+const InfoLabel = ({ui}) => {
 
-            <span>{(this.props.ui.loading) ? <Label
-                bsStyle="default">Loading...</Label> : ((this.props.ui.errors.message) ?
-                <Label bsStyle="danger"> {this.props.ui.errors.message} </Label> :
-                <Label bsStyle="success">{this.props.ui.message ? this.props.ui.message : 'Success' }</Label>)}</span>
+    return (
 
-        )
-    }
-}
+        <span>{(ui.loading) ? <Label
+            bsStyle="default">Loading...</Label> : ((ui.errors.message) ?
+            <Label bsStyle="danger"> {ui.errors.message} </Label> :
+            <Label bsStyle="success">{ui.message ? ui.message : 'Success' }</Label>)}</span>
+
+    )
+
+};
 
 InfoLabel.PropTypes = {
     ui: PropTypes.object.isRequired

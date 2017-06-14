@@ -2,7 +2,7 @@
  * Created by paul on 5/30/17.
  */
 
-export function weekOfMonth(dateValue) {
+export const weekOfMonth = (dateValue) => {
     let month = dateValue.getMonth()
         , year = dateValue.getFullYear()
         , firstWeekday = new Date(year, month, 1).getDay()
@@ -16,24 +16,25 @@ export function weekOfMonth(dateValue) {
     return week === weeksInMonth ? index + 5 : week;
 };
 
-export function defaultMonth() {
+export const defaultMonth = () => {
     let d = new Date(),
         w = weekOfMonth(d),
         m = (w < 4) ? d.getMonth() : d.getMonth() + 1,
         y = d.getFullYear();
     return `${y}-${('0' + m).slice(-2)}`;
 
-}
+};
 
-export function borderOfMonth(month) {
+export const borderOfMonth = (month) => {
     let d = new Date(month),
         m = d.getMonth(),
         y = d.getFullYear(),
         fd = new Date(y, m, 1),
         ld = new Date(y, m + 1, 0);
     return {first: fd, last: ld};
-}
+};
 
-export function toSqlDate(date) {
+export const toSqlDate = (date) => {
     return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-}
+};
+

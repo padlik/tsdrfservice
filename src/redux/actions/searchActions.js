@@ -12,7 +12,7 @@ export const SUMMARY_SEARCH_CHANGED = 'SUMMARY_SEARCH_CHANGED';
 export const LIST_SEARCH_CHANGED = 'LIST_SEARCH_CHANGED';
 
 
-export function summarySearchChanged(state) {
+export const summarySearchChanged = (state) => {
     let {search, month} = state;
     month = (month) ? month : defaultMonth();
     return {
@@ -22,9 +22,9 @@ export function summarySearchChanged(state) {
             month: month
         }
     }
-}
+};
 
-export function summarySearchClear() {
+export const summarySearchClear = () => {
     let defMonth = defaultMonth();
     return {
         type: SUMMARY_SEARCH_CHANGED,
@@ -33,9 +33,9 @@ export function summarySearchClear() {
             month: defMonth,
         }
     }
-}
+};
 
-export function listSearchChanged(params) {
+export const listSearchChanged = (params)=> {
     let {search, month, userid, inherit} = params;
     return {
         type: LIST_SEARCH_CHANGED,
@@ -46,10 +46,10 @@ export function listSearchChanged(params) {
             inherit: inherit
         }
     }
-}
+};
 
 
-export function apiRequestSummary() {
+export const apiRequestSummary = () => {
     return (dispatch, getState) => {
         let state = getState();
         let {search, month} = state.search.summary_search;
@@ -78,9 +78,9 @@ export function apiRequestSummary() {
             return dispatch(onMessage("cached"));
         }
     }
-}
+};
 
-export function apiRequestDetail(userId) {
+export const apiRequestDetail = (userId) => {
     return (dispatch, getState) => {
         let state = getState();
         let {userid, search, month} = state.search.list_search.searches.filter(row => {
@@ -117,3 +117,4 @@ export function apiRequestDetail(userId) {
         }
     }
 };
+

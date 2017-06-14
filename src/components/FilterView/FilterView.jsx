@@ -1,36 +1,35 @@
-import React, {Component, PropTypes} from "react";
+import React, {PropTypes} from "react";
 /**/
 import FormGroup from "react-bootstrap/lib/FormGroup";
 import ControlLabel from "react-bootstrap/lib/ControlLabel";
 import FormControl from "react-bootstrap/lib/FormControl";
 import Button from "react-bootstrap/lib/Button";
 
-class FilterView extends Component {
+const FilterView = ({text, month, onSearchChange, onMonthChange, onClearSearch}) => {
 
 
-    render() {
-        const {text, month, onSearchChange, onMonthChange, onClearSearch} = this.props;
-        return (
-            <FormGroup controlId="formSearchText">
-                <ControlLabel>Search:</ControlLabel>
-                {' '}&nbsp;
-                <FormControl type="text"
-                             placeholder="Search Text"
-                             value={text}
-                             onChange={(e) => onSearchChange(e.target.value)}
-                />
-                {'  '}&nbsp;&nbsp;
-                <ControlLabel>Target Month:</ControlLabel>
-                {'  '}&nbsp;
-                <FormControl type="month" value={month} onChange={(e) => onMonthChange(e.target.value)}/>
-                &nbsp;
-                {(text || month) ? <Button onClick={onClearSearch}>Clear</Button> : ''}
-            </FormGroup>
+    return (
+        <FormGroup controlId="formSearchText">
+            <ControlLabel>Search:</ControlLabel>
+            {' '}&nbsp;
+            <FormControl type="text"
+                         placeholder="Search Text"
+                         value={text}
+                         onChange={(e) => onSearchChange(e.target.value)}
+            />
+            {'  '}&nbsp;&nbsp;
+            <ControlLabel>Target Month:</ControlLabel>
+            {'  '}&nbsp;
+            <FormControl type="month" value={month} onChange={(e) => onMonthChange(e.target.value)}/>
+            &nbsp;
+            {(text || month) ? <Button onClick={onClearSearch}>Clear</Button> : ''}
+        </FormGroup>
 
-        );
-    }
+    );
 
-}
+
+};
+
 
 FilterView.propTypes = {
     text: PropTypes.string,

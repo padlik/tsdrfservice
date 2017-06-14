@@ -8,7 +8,7 @@ const detailInitialState = {
 };
 
 
-export default function (state = detailInitialState, action) {
+const detailReducer = (state = detailInitialState, action) => {
     switch (action.type) {
         case DETAIL_REQ_FINISHED:
             let idx = state.details.findIndex(row => row.userid === action.userid);
@@ -45,4 +45,6 @@ export default function (state = detailInitialState, action) {
 
     }
 
-}
+};
+
+export default detailReducer;

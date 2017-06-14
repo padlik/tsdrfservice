@@ -21,6 +21,7 @@ class DetailFilterPanel extends Component {
     componentDidMount() {
         if (this.props.detail_search.length === 0) {
             //there is no custom search, so we create it
+            console.log("No custom search");
             this.search = {
                 search: '',
                 month: this.props.summary_search.month,
@@ -28,6 +29,7 @@ class DetailFilterPanel extends Component {
                 inherit: true
             };
         } else {
+            console.log("Custom search");
             this.search = {
                 search: this.props.detail_search[0].search,
                 month: (this.props.detail_search[0].inherit) ? this.props.summary_search.month : this.props.detail_search[0].month,
@@ -35,7 +37,6 @@ class DetailFilterPanel extends Component {
                 inherit: this.props.detail_search[0].inherit
             };
         }
-
         this.updateSearch();
     }
 
@@ -73,11 +74,11 @@ class DetailFilterPanel extends Component {
     render() {
         return (
             <DetailFilterView
-                text={(this.props.detail_search.length === 0) ? this.search.search : this.props.detail_search[0].search}
-                month={(this.props.detail_search.length === 0) ? this.search.month : this.props.detail_search[0].month}
+                text={(!this.props.detail_search.length) ? this.search.search : this.props.detail_search[0].search}
+                month={(!this.props.detail_search.length) ? this.search.month : this.props.detail_search[0].month}
                 onSearchChange={this.handleSearchChange}
                 onMonthChange={this.handleMonthChange}
-                inheritSearch={(this.props.detail_search.length === 0) ? this.search.inherit : this.props.detail_search[0].inherit}
+                inheritSearch={(!this.props.detail_search.length) ? this.search.inherit : this.props.detail_search[0].inherit}
                 onInheritSearchChange={this.handleInheritSearchChange}/>
         )
     }

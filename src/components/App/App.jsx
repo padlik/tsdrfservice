@@ -32,7 +32,6 @@ class App extends Component {
 
     componentDidMount() {
         if (this.props.data.length === 0) {
-            this.props.actions.summarySearchClear();
             this.props.actions.apiRequestSummary();
         }
     }

@@ -2,10 +2,12 @@
  * Created by paul on 5/11/17.
  */
 import {LIST_SEARCH_CHANGED, SUMMARY_SEARCH_CHANGED} from "redux/actions/searchActions";
+import {defaultMonth} from "utils/dateUtils";
+
 
 const searchInitialState = {
     summary_search: {
-        month: '',
+        month: defaultMonth(),
         search: ''
     },
     list_search: {
@@ -13,7 +15,7 @@ const searchInitialState = {
     }
 };
 
-export default function (state = searchInitialState, action) {
+const searchReducer = (state = searchInitialState, action) => {
     switch (action.type) {
         case SUMMARY_SEARCH_CHANGED:
             return Object.assign({}, state, {
@@ -54,4 +56,6 @@ export default function (state = searchInitialState, action) {
         default:
             return state;
     }
-}
+};
+
+export default searchReducer;

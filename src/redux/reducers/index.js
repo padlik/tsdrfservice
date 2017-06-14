@@ -8,9 +8,11 @@ import uiReducer from "./uiReducer";
 import detailReducer from "./detailReducer";
 
 
-export default combineReducers({
+const rootReducer = combineReducers({
     summary: summaryReducer,
     search: searchReducer,
     ui: uiReducer,
     detail: detailReducer
 });
+
+export default rootReducer;
