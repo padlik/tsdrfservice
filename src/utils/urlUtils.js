@@ -6,14 +6,14 @@ export const formatUrl = (state) => {
     let {search, month, inherit} = state;
     let u = '';
     if (search || month) {
-        u +='?';
+        u += '?';
         if (search) {
             u += `search=${search}&`
         }
         if (month) {
             u += `month=${month}&`
         }
-        if (inherit){
+        if (inherit) {
             u += `inherit=${inherit}`
         }
     }

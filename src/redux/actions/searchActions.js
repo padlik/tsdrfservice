@@ -35,7 +35,7 @@ export const summarySearchClear = () => {
     }
 };
 
-export const listSearchChanged = (params)=> {
+export const listSearchChanged = (params) => {
     let {search, month, userid, inherit} = params;
     return {
         type: LIST_SEARCH_CHANGED,
