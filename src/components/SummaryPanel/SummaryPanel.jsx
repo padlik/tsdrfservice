@@ -37,4 +37,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps,)(SummaryPanel)
+export default connect(mapStateToProps)(SummaryPanel)

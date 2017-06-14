@@ -25,7 +25,7 @@ export const summarySearchChanged = (state) => {
 };
 
 export const summarySearchClear = () => {
-    let defMonth = defaultMonth();
+    const defMonth = defaultMonth();
     return {
         type: SUMMARY_SEARCH_CHANGED,
         summary_search: {
@@ -36,7 +36,7 @@ export const summarySearchClear = () => {
 };
 
 export const listSearchChanged = (params) => {
-    let {search, month, userid, inherit} = params;
+    const {search, month, userid, inherit} = params;
     return {
         type: LIST_SEARCH_CHANGED,
         list_search: {
@@ -51,10 +51,10 @@ export const listSearchChanged = (params) => {
 
 export const apiRequestSummary = () => {
     return (dispatch, getState) => {
-        let state = getState();
-        let {search, month} = state.search.summary_search;
+        const state = getState();
+        const {search, month} = state.search.summary_search;
         let url = API_URL + USER_EP + REQ_FORMAT;
-        let {first, last} = borderOfMonth(month);
+        const {first, last} = borderOfMonth(month);
         if (search) {
             url += `&search=${search}`
         }
@@ -64,7 +64,7 @@ export const apiRequestSummary = () => {
         if (last) {
             url += `&date_to=${toSqlDate(last)}`
         }
-        let searchHash = stringHash(search, first, last);
+        const searchHash = stringHash(search, first, last);
         if (searchHash !== state.summary.search_hash || state.summary.invalid) {
             dispatch(isLoading(true));
             dispatch(onMessage(''));
@@ -82,8 +82,8 @@ export const apiRequestSummary = () => {
 
 export const apiRequestDetail = (userId) => {
     return (dispatch, getState) => {
-        let state = getState();
-        let {userid, search, month} = state.search.list_search.searches.filter(row => {
+        const state = getState();
+        const {userid, search, month} = state.search.list_search.searches.filter(row => {
             return (row.userid === userId)
         })[0];
         let url = API_URL + USER_EP + `/${userid}` + REQ_FORMAT;
@@ -97,15 +97,16 @@ export const apiRequestDetail = (userId) => {
         if (last) {
             url += `&date_to=${toSqlDate(last)}`
         }
-        let searchHash = stringHash(search, first, last);
+        const searchHash = stringHash(search, first, last);
 
-        let detail = state.detail.details.filter(row => {
+        const detail = state.detail.details.filter(row => {
             return (row.userid === userId)
         });
 
-        let currentHash = (detail.length !== 0) ? detail[0].search_hash : '';
+        const currentHash = (detail.length) ? detail[0].search_hash : '';
+        const invalid = (detail.length) ? detail[0].invalid : false;
 
-        if (searchHash !== currentHash) {
+        if (searchHash !== currentHash || invalid) {
             dispatch(isLoading(true));
             dispatch(onMessage(''));
             return fetchJson(url, {})

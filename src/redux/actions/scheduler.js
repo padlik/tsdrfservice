@@ -3,6 +3,7 @@ import {fetchJson} from "utils/fetchJson";
 import configureStore from "redux/configureStore";
 import {isError, onMessage, onOverallUpdated} from "redux/actions/uiActions";
 import {summaryInvalidate} from "redux/actions/summaryActions";
+import {detailInvalidated} from "redux/actions/detailActions";
 
 
 const scheduler = () => {
@@ -17,6 +18,7 @@ const scheduler = () => {
                     store.dispatch(onOverallUpdated(json));
                     if (curTsCount !== json.timesheets && curTsCount !== -1) {
                         store.dispatch(summaryInvalidate(true)); //set invalidate flag
+                        store.dispatch(detailInvalidated());
                         console.log('Invalidate logic should go there...');
                     }
                 })

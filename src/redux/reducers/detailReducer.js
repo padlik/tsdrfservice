@@ -1,7 +1,7 @@
 /**
  * Created by paul on 5/23/17.
  */
-import {DETAIL_REQ_FINISHED} from "redux/actions/detailActions";
+import {DETAIL_INVALIDATED, DETAIL_REQ_FINISHED} from "redux/actions/detailActions";
 
 const detailInitialState = {
     details: []
@@ -11,7 +11,7 @@ const detailInitialState = {
 const detailReducer = (state = detailInitialState, action) => {
     switch (action.type) {
         case DETAIL_REQ_FINISHED:
-            let idx = state.details.findIndex(row => row.userid === action.userid);
+            const idx = state.details.findIndex(row => row.userid === action.userid);
             if (idx === -1) {
                 return {
                     details: [
@@ -39,6 +39,16 @@ const detailReducer = (state = detailInitialState, action) => {
                     ...state.details.slice(idx + 1),
                 ]
             };
+        case DETAIL_INVALIDATED:
+            if (state.details) {
+                return {
+                    details: state.details.map((detail) => {
+                        return Object.assign({}, detail, {invalid: true});
+                    })
+                }
+            } else {
+                return state;
+            }
 
         default:
             return state;

@@ -12,13 +12,12 @@ export const detailRequestFinished = (userid, json, hash) => {
         userid: userid,
         sheets: json
     };
-}
+};
 
-export const detailInvalidated = (userId, invalid) => {
+export const detailInvalidated = () => {
     return {
-        type: DETAIL_INVALIDATED,
-        userid: userId,
-        invalid: invalid
+        type: DETAIL_INVALIDATED
     }
-}
+};
+
 
