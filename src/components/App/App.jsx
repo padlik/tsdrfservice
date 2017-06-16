@@ -31,6 +31,7 @@ const App = ({ui}) => {
     return (
         <BrowserRouter>
             <Row>
+                <LoadingOverlay isLoading={ui.loading}/>
                 <Col md={12}>
                     <Navbar>
                         <Navbar.Header>
@@ -49,7 +50,6 @@ const App = ({ui}) => {
                         </Navbar.Collapse>
                     </Navbar>
                     <Grid>
-                        <LoadingOverlay isLoading={ui.loading}/>
                         <Switch>
                             <Route exact path="/" component={SummaryPanel}/>
                             <Route path="/ts/:userid" component={ListViewPanel}/>

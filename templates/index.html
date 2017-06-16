@@ -1,3 +1,5 @@
+{% load static %}
+{% load render_bundle from webpack_loader %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,16 +9,16 @@
     {% if debug %}
         <link rel="stylesheet" href="http://localhost:8050/public/assets/styles.css">
     {% else %}
-        <link rel="stylesheet" href="/public/assets/styles.css">
+        {% render_bundle 'main' 'css' %}
     {% endif %}
 
 </head>
 <body>
    <div id="react-view"></div>
-{% if debug %}
+ {% if debug %}
     <script type="application/javascript" src="http://localhost:8050/public/assets/bundle.js"></script>
 {% else %}
-    <script type="application/javascript" src="/public/assets/bundle.js"></script>
+    {% render_bundle 'main' 'js' %}
 {% endif %}
 </body>
 </html>
